@@ -1,6 +1,6 @@
 # Plan — Naive Bayes vs AWS Strands Decider 2B
 
-Status: **DRAFT — awaiting approval.** Nothing long-running has been executed.
+Status: **APPROVED 2026-10-05** (dataset WOS-46985 L1; everything runs in Docker). Nothing long-running has been executed.
 Written 2026-10-05.
 
 ## 0. Findings so far (verified 2026-10-05)
@@ -38,8 +38,25 @@ Fallbacks if WOS fails (to be verified, in order): an older or broader news-topi
 
 **Hosts.** This workstation is `nebula` (i7-1165G7, no NVIDIA GPU). All measured runs happen on **orion**. The scripts are developed here and executed there.
 
+**orion, verified 2026-10-05:**
+- AMD Ryzen 9 3900 (12 cores), kernel 7.0.0-34, NVIDIA driver 595.91.07, 2× RTX 3090. Both GPUs were idle (1 MiB used).
+- Docker 29.4.2 with the `nvidia` runtime.
+- RAPL is exposed as `intel-rapl:0` (`package-0`). Its `energy_uj` is root-only (`-r--------`).
+
+## Execution environment: Docker (approved)
+Everything except a host preflight runs in one image, `nb-vs-decider`. That covers the data, the contamination check, Decider, NB, energy, plots and the report.
+- **Image:** `nvidia/cuda` base image with a `uv`-created venv at `/opt/venv`. Every package is pinned from `uv.lock`, and `requirements.txt` and `requirements-dev.txt` are exported from it. Decider is installed at the pinned version.
+- The image is built for `linux/amd64` and `linux/arm64` with `docker buildx`. There is no GitLab remote, so it is built locally for now.
+- **compose services:**
+  - `pipeline`: GPU 0 only (`device_ids: ["0"]`). Bind mounts `results/`, `plots/` and the report. Has a named volume for the HF cache.
+  - `dev`: CPU only. Runs ruff and pytest, and works on nebula.
+- **RAPL in Docker (tested on orion):** Docker masks `/sys/devices/virtual/powercap` by default as a PLATYPUS mitigation, so reading it in a default container fails. A read-only bind mount (`/sys/devices/virtual/powercap:/host/powercap:ro`) can be read by the container's root. That needs no `privileged` mode, no AppArmor change and no host chmod.
+- **NVML in Docker (tested):** `--gpus device=0` exposes only the measured GPU.
+- **Host preflight (`preflight_host.sh`):** run by `run_all.sh` on orion before `docker compose run`. It checks that `nvidia-smi` shows no compute processes and that llama-swap/vLLM are not holding a GPU. If they are, it **aborts and asks**. It never stops services. Inside a container, `nvidia-smi` can't see host process names, which is why this check runs on the host.
+- **Caveat:** Docker isolates the software, not the energy. RAPL and NVML count for the whole host and the whole GPU. The idle baseline is measured in the same container setup, so the daemon and container overhead cancel out in the marginal figures. The Decider and NB containers are pinned to fixed CPU sets (`cpuset`) so runs are repeatable.
+
 ## 1. Pin and smoke-test Decider (on orion, short run)
-1. Fresh `uv venv` in `nb-vs-decider/.venv`. Pin all packages; `uv pip compile` produces `requirements*.txt`.
+1. Build the image (pinned `uv.lock` → venv at `/opt/venv`). Exported `requirements*.txt` are committed.
 2. Install `strands-decider` at the pinned version. Load the pinned model revision. Run the model-card example and confirm it matches the published output to about 3 decimals.
 3. Read `docs/inference.md` in the repo. Use the reference `choice` path. Find the max-options and context limits and the batching API.
 4. Record versions: package, model SHA, git SHA, base model SHA, torch, CUDA, driver, CPU.
@@ -81,12 +98,13 @@ The smallest n where NB's mean accuracy ≥ Decider's and an exact McNemar test 
 ## 7. Energy measurement (orion)
 - Pre-flight: `nvidia-smi` shows both GPUs idle, and llama-swap/vLLM are not holding a GPU. **If either is busy, stop and ask.**
 - GPU: pynvml `nvmlDeviceGetTotalEnergyConsumption` on the device index Decider uses (pinned with `CUDA_VISIBLE_DEVICES`).
-- CPU: RAPL `energy_uj` (package plus dram if present), with wrap-around handled. Since kernel 5.10 `energy_uj` is root-only, so you'll likely need to grant read access (udev rule or `chmod`). **I will ask, not estimate.** AMD: `amd_energy`/RAPL via powercap.
+- CPU: RAPL `package-0` `energy_uj`, read through the read-only bind mount at `/host/powercap`. Wrap-around is handled with `max_energy_range_uj`. orion's Zen 2 CPU exposes no DRAM domain, which is noted as a limitation. If a counter can't be read, **stop and ask. Never estimate.**
 - Idle baseline: 60 s before each measured phase. Marginal = gross − idle_power × duration. Both are reported.
 - Phases measured separately: Decider load, Decider warmup (excluded), Decider inference (bs = 1 and best bs), NB training per curve point, NB inference.
 - Wall power: if orion's PSU/wall Prometheus exporter is reachable, query the same windows and cross-check.
 - Latency: per-item p50/p95 and total wall-clock time for both methods.
 - NB runs single-process on CPU. GPU idle draw during NB runs is reported but not attributed to NB.
+- Small NB fits (e.g. 1 example per class) finish in milliseconds, which is below a clean RAPL window. Each fit and predict is repeated in a loop until the window is at least 10 s, then divided by the number of repeats. The repeat count is reported.
 
 ## 8. Outputs
 - `results/*.csv` (decider_runs, nb_runs, nb_variants, energy, latency, contamination, versions).
@@ -96,8 +114,8 @@ The smallest n where NB's mean accuracy ≥ Decider's and an exact McNemar test 
 - `run_all.sh`: runs end to end with resumable stages (checkpoints by output file).
 
 ## 9. Assumptions and open questions
-1. **Dataset:** WOS-46985 level-1 as the replacement. ← needs your decision.
-2. **Docker vs native:** your global rules ask for docker compose. Energy and RAPL access are cleaner natively, so I propose native `uv` on orion for measured runs, with a GPU-enabled `docker-compose.yml` provided for reproducibility (not used for the reported numbers).
+1. **Dataset:** WOS-46985 level-1, approved 2026-10-05.
+2. **Docker:** approved. Everything runs in the `nb-vs-decider` image (see Execution environment).
 3. **Model version:** pin the newest release the official PyPI package loads (v21 if compatible, else v19). Decider ships often, so I'll freeze at implementation time.
-4. **RAPL permissions on orion:** likely needed. I'll ask when we get there.
+4. **RAPL permissions on orion:** not needed. The read-only bind mount works (tested 2026-10-05).
 5. Execution: implementation by Sonnet subagents per task, with the main agent reviewing and committing.

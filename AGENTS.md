@@ -15,6 +15,7 @@ does each approach cost in energy (kWh)? Full plan: [`docs/PLAN.md`](docs/PLAN.m
 docs/PLAN.md          approved plan, dataset decision log, open questions
 nb-vs-decider/        ALL deliverables live here
   scripts/            pipeline stages (one module per stage)
+  Dockerfile, docker-compose.yml, preflight_host.sh
   run_all.sh          one-command end-to-end entry point
   config/             pinned versions, label descriptions (versioned), seeds
   results/*.csv       raw per-run metrics (never hand-edited)
@@ -42,8 +43,13 @@ nb-vs-decider/        ALL deliverables live here
 - Plan first; show the plan before running anything long.
 
 ## Environment & tooling
-- Python via a fresh **`uv`** venv with pinned versions (`uv pip compile` → `requirements.txt`,
-  `requirements-dev.txt`). Record package, driver, CUDA, CPU model and Decider versions in the report.
+- **Everything runs in Docker** (`nb-vs-decider` image, compose services `pipeline` (GPU 0) and `dev` (CPU)).
+  Only `preflight_host.sh` (GPU-idle / llama-swap / vLLM check) runs on the host, via `run_all.sh`.
+- Python inside the image: `uv` venv at `/opt/venv`, pinned via `uv.lock`; export `requirements.txt` and
+  `requirements-dev.txt`. Build multi-arch (`linux/amd64`, `linux/arm64`) with buildx.
+- RAPL in containers: Docker masks `/sys/devices/virtual/powercap`; bind-mount it read-only to
+  `/host/powercap`. Do NOT use `privileged` or disable AppArmor.
+- Record package, driver, CUDA, CPU model and Decider versions in the report.
 - `ruff` for lint/format (flake8 + black + isort rules). Standard `logging` module only.
 - Config via environment variables loaded with `python-dotenv` (`.env`, never committed).
 - Determinism: every random choice takes an explicit seed; seeds are listed in config.

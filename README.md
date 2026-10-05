@@ -14,12 +14,12 @@ Planning. See [`docs/PLAN.md`](docs/PLAN.md). No benchmark has been run yet.
 - `results/*.csv`, `plots/learning_curve.png`, `plots/energy.png`, `REPORT.md`.
 
 ## Running (once implemented)
-Designed for a Linux host with an NVIDIA GPU (reference host: 2× RTX 3090).
+Runs in Docker on a Linux host with an NVIDIA GPU and the NVIDIA container toolkit (reference host: 2× RTX 3090).
 ```bash
 cd nb-vs-decider
 ./run_all.sh        # end-to-end: data → contamination check → Decider → NB curve → energy → report
 ```
-Reading CPU energy counters (RAPL) usually needs extra permissions on Linux ≥ 5.10.
+`run_all.sh` runs a host GPU-idle preflight, then the pipeline in the `nb-vs-decider` image. CPU energy counters are bind-mounted read-only into the container. No host permission changes are needed.
 
 ## Contributors
 Agent instructions are in [`AGENTS.md`](AGENTS.md).
