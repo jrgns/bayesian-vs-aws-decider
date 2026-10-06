@@ -4,3 +4,5 @@ __pycache__/
 .env
 .ruff_cache/
 nb-vs-decider/data/cache/
+nb-vs-decider/data/raw/
+nb-vs-decider/data/processed/

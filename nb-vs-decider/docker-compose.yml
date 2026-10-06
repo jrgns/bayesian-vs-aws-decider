@@ -26,6 +26,22 @@ services:
       - ./plots:/app/plots
       - hf-cache:/cache/hf
 
+  # CPU-only stages (dataset, contamination): the pipeline runtime image without the GPU.
+  # No powercap mount: nothing here is energy-measured. Scripts are baked into the image.
+  cpu:
+    image: nb-vs-decider:dev
+    environment:
+      - CONTAM_WORKERS
+    env_file:
+      - path: .env
+        required: false
+    cpuset: "${CPU_CPUSET:-12-23}"
+    volumes:
+      - ./results:/app/results
+      - ./plots:/app/plots
+      - ./data:/app/data
+      - hf-cache:/cache/hf
+
   dev:
     image: nb-vs-decider:dev-tools
     build:

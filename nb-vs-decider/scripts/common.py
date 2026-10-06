@@ -6,6 +6,8 @@ import json
 import logging
 import os
 import re
+import shutil
+import urllib.request
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -13,6 +15,7 @@ from dotenv import load_dotenv
 
 APP_DIR = Path(os.environ.get("APP_DIR", Path(__file__).resolve().parent.parent))
 RESULTS_DIR = APP_DIR / "results"
+DATA_DIR = APP_DIR / "data"
 
 # Pinned defaults; .env / environment variables override (see .env.example).
 DEFAULT_MODEL = "StrandsAgents/strands-decider-2B-hobson-v21"
@@ -61,6 +64,25 @@ def write_json(name: str, data: dict) -> Path:
     path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n")
     log.info("wrote %s", path)
     return path
+
+
+def _open_url(url: str):
+    # Some hosts (Mendeley's Cloudflare) refuse urllib's default user agent.
+    req = urllib.request.Request(url, headers={"User-Agent": "curl/8.5.0"})
+    return urllib.request.urlopen(req, timeout=120)
+
+
+def fetch_text(url: str) -> str:
+    with _open_url(url) as r:
+        return r.read().decode("utf-8")
+
+
+def download(url: str, dest: Path) -> None:
+    """Stream `url` to `dest` (via a .part file, so an interrupted download is never kept)."""
+    part = dest.with_name(dest.name + ".part")
+    with _open_url(url) as r, part.open("wb") as f:
+        shutil.copyfileobj(r, f)
+    part.rename(dest)
 
 
 @dataclass(frozen=True)

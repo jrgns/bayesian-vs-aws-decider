@@ -1,0 +1,149 @@
+{
+  "cleaning": {
+    "clean": 46985,
+    "conflict_groups": 0,
+    "conflict_rows_dropped": 0,
+    "duplicate_copies_dropped": 0,
+    "duplicate_groups": 0,
+    "empty_dropped": 0,
+    "raw": 46985
+  },
+  "contamination": {
+    "items_with_any_hit_removed": 254,
+    "provisional_test_hit_share": 0.0056022408963585435,
+    "removed_from_provisional": {
+      "dev": 13,
+      "pool": 185,
+      "test": 56
+    }
+  },
+  "label_map": {
+    "0": {
+      "archive_domain": "CS ",
+      "name": "Computer Science"
+    },
+    "1": {
+      "archive_domain": "ECE ",
+      "name": "Electrical Engineering"
+    },
+    "2": {
+      "archive_domain": "Psychology  ",
+      "name": "Psychology"
+    },
+    "3": {
+      "archive_domain": "MAE ",
+      "name": "Mechanical Engineering"
+    },
+    "4": {
+      "archive_domain": "Civil ",
+      "name": "Civil Engineering"
+    },
+    "5": {
+      "archive_domain": "Medical ",
+      "name": "Medical Science"
+    },
+    "6": {
+      "archive_domain": "biochemistry ",
+      "name": "Biochemistry"
+    }
+  },
+  "length": {
+    "example_prompt": "ed with higher waist circumference, diastolic blood pressure, fasting glucose, and increased risk of metabolic diseases.\n</state>\n<question type=\"choice\">\nSelect exactly one option.\nWhich field is this abstract from?\n<options>\n1. Computer Science\n2. Electrical Engineering\n3. Psychology\n4. Mechanical Engineering\n5. Civil Engineering\n6. Medical Science\n7. Biochemistry\n</options>\n</question>\n<answer>",
+    "max_length": 4096,
+    "n_over_max_length": 0,
+    "placeholder_question": "Which field is this abstract from?",
+    "prompt_tokens": {
+      "max": 1681,
+      "min": 102,
+      "p50": 341.0,
+      "p95": 568.0,
+      "p99": 701.0
+    },
+    "text_tokens": {
+      "max": 1602,
+      "min": 23,
+      "p50": 262.0,
+      "p95": 489.0,
+      "p99": 622.0
+    },
+    "tokenizer_repo": "StrandsAgents/strands-decider-2B-hobson-v21",
+    "tokenizer_revision": "2b52a6235c1b8306bbfa30b00b9d4b74b63a39f5"
+  },
+  "n_final": 46731,
+  "n_items": {
+    "dev": 2002,
+    "pool": 34733,
+    "test": 9996
+  },
+  "per_class": {
+    "clean": {
+      "Biochemistry": 5687,
+      "Civil Engineering": 4237,
+      "Computer Science": 6514,
+      "Electrical Engineering": 5483,
+      "Mechanical Engineering": 3297,
+      "Medical Science": 14625,
+      "Psychology": 7142
+    },
+    "dev": {
+      "Biochemistry": 286,
+      "Civil Engineering": 286,
+      "Computer Science": 286,
+      "Electrical Engineering": 286,
+      "Mechanical Engineering": 286,
+      "Medical Science": 286,
+      "Psychology": 286
+    },
+    "pool": {
+      "Biochemistry": 3959,
+      "Civil Engineering": 2503,
+      "Computer Science": 4717,
+      "Electrical Engineering": 3729,
+      "Mechanical Engineering": 1560,
+      "Medical Science": 12858,
+      "Psychology": 5407
+    },
+    "raw": {
+      "Biochemistry": 5687,
+      "Civil Engineering": 4237,
+      "Computer Science": 6514,
+      "Electrical Engineering": 5483,
+      "Mechanical Engineering": 3297,
+      "Medical Science": 14625,
+      "Psychology": 7142
+    },
+    "test": {
+      "Biochemistry": 1428,
+      "Civil Engineering": 1428,
+      "Computer Science": 1428,
+      "Electrical Engineering": 1428,
+      "Mechanical Engineering": 1428,
+      "Medical Science": 1428,
+      "Psychology": 1428
+    }
+  },
+  "seed": 20261005,
+  "source": {
+    "archive_sha256": "b787d484bff88b0dcdb3fa291d06ec9d2f025dc2a67ce1045d0c688cd96ccf8a",
+    "archive_url": "https://data.mendeley.com/public-files/datasets/9rw3vkcfy4/files/c9ea673d-5542-44c0-ab7b-f1311f7d61df/file_downloaded",
+    "files": [
+      "WOS46985/X.txt",
+      "WOS46985/YL1.txt",
+      "Meta-data/Data.xlsx"
+    ],
+    "preferred": {
+      "config": "WOS46985",
+      "id": "HDLTex/web_of_science",
+      "revision": "26ae29c300edec4acafbda030653640241c9f9a8"
+    },
+    "preferred_load_status": "RuntimeError: Dataset scripts are no longer supported, but found web_of_science.py",
+    "used": "original archive (URL in the HF loading script at that revision)"
+  },
+  "split_sha256": {
+    "dev": "9a6dc979d4ee3777bee1306e7bd3c403e84b812e682dd971ae7c5ef352f1eee9",
+    "pool": "00f56b319b8df45a95d900282fd4da9a957eaff70964d2078fb42aabb85a46f2",
+    "test": "1b777e657fe53ba5d2b81223681fd3b9bf724653d14b7aa61810b3fe506c2729"
+  },
+  "xlsx_rows": 46985,
+  "xlsx_vs_txt_row_mismatches": 0
+}

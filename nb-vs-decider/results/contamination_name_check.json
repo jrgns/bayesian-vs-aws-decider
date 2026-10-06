@@ -1,0 +1,63 @@
+{
+  "alias_hits": {
+    "data/sources.md": [],
+    "model_card": [],
+    "recipes.py": [],
+    "training/recipe.sh": []
+  },
+  "aliases_searched": [
+    "web_of_science",
+    "web of science",
+    "wos",
+    "hdltex",
+    "wos46985",
+    "wos-46985"
+  ],
+  "card_datasets": [
+    "ccdv/arxiv-classification",
+    "clinc/clinc_oos",
+    "community-datasets/yahoo_answers_topics",
+    "dair-ai/emotion",
+    "fancyzhx/ag_news",
+    "fancyzhx/dbpedia_14",
+    "google-research-datasets/paws",
+    "google/boolq",
+    "google/civil_comments",
+    "legacy-datasets/banking77",
+    "mteb/amazon_massive_intent",
+    "nyu-mll/glue",
+    "osyvokon/pavlick-formality-scores",
+    "papluca/language-identification",
+    "qiaojin/PubMedQA",
+    "raquiba/Sarcasm_News_Headline",
+    "sealuzh/app_reviews",
+    "SetFit/20_newsgroups",
+    "SetFit/sst5",
+    "SetFit/subj",
+    "SetFit/TREC-QC",
+    "tals/vitaminc",
+    "tasksource/ruletaker",
+    "ucberkeley-dlab/measuring-hate-speech",
+    "ucirvine/sms_spam",
+    "Yelp/yelp_review_full",
+    "nvidia/HelpSteer2",
+    "tasksource/Boardgame-QA",
+    "hotpotqa/hotpot_qa"
+  ],
+  "code_commit": "3e94e9d84c620ed5a95f1a3310c3decb971e261c",
+  "dataset_id": "HDLTex/web_of_science",
+  "dataset_id_in_card_list": false,
+  "model_revision": "2b52a6235c1b8306bbfa30b00b9d4b74b63a39f5",
+  "name_match": false,
+  "sha256sums_listed_but_absent_from_repo": [
+    "data/holdout_v5_norule.jsonl",
+    "data/multistep_v14.jsonl",
+    "data/multistep_v14_eval.jsonl",
+    "data/raw/contract-nli.zip",
+    "data/raw/helpsteer2/train.jsonl.gz",
+    "data/raw/helpsteer2/validation.jsonl.gz",
+    "data/raw/musique_data_v1.0.zip",
+    "data/train_v5.holdout.jsonl",
+    "data/train_v5.jsonl"
+  ]
+}
