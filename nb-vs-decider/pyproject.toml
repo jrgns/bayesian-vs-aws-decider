@@ -1,0 +1,39 @@
+[project]
+name = "nb-vs-decider"
+version = "0.1.0"
+description = "Naive Bayes learning curve vs AWS Strands Decider 2B: accuracy and energy"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "strands-decider==0.1.0",
+    "flash-linear-attention",
+    "torch",
+    "nvidia-ml-py",
+    "python-dotenv",
+    "scikit-learn",
+    "datasets",
+    "pandas",
+    "numpy",
+    "scipy",
+    "matplotlib",
+]
+
+[dependency-groups]
+dev = ["ruff", "pytest"]
+
+[tool.uv]
+package = false
+environments = ["sys_platform == 'linux'"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["scripts"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

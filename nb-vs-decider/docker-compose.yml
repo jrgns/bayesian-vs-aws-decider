@@ -1,0 +1,41 @@
+name: nb-vs-decider
+
+services:
+  pipeline:
+    image: nb-vs-decider:dev
+    build:
+      context: .
+      target: runtime
+    # DECIDER_IMAGE is set by run_all.sh (image id) and recorded in versions.json.
+    environment:
+      - DECIDER_IMAGE
+    env_file:
+      - path: .env
+        required: false
+    cpuset: "${PIPELINE_CPUSET:-0-5}"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["${DECIDER_GPU:-0}"]
+              capabilities: [gpu]
+    volumes:
+      - /sys/devices/virtual/powercap:/host/powercap:ro
+      - ./results:/app/results
+      - ./plots:/app/plots
+      - hf-cache:/cache/hf
+
+  dev:
+    image: nb-vs-decider:dev-tools
+    build:
+      context: .
+      target: dev
+    volumes:
+      - ./scripts:/app/scripts
+      - ./tests:/app/tests
+      - ./pyproject.toml:/app/pyproject.toml
+    command: sh -c "ruff check . && ruff format --check . && pytest -q"
+
+volumes:
+  hf-cache:
