@@ -13,6 +13,8 @@ does each approach cost in energy (kWh)? Full plan: [`docs/PLAN.md`](docs/PLAN.m
 ## Layout
 ```
 docs/PLAN.md          approved plan, dataset decision log, open questions
+docs/PLAN_STABILITY.md  follow-up: determinism/flip-rate test (runs after main REPORT.md exists)
+  (stability deliverables go in nb-vs-decider/stability/)
 nb-vs-decider/        ALL deliverables live here
   scripts/            pipeline stages (one module per stage)
   Dockerfile, docker-compose.yml, preflight_host.sh
