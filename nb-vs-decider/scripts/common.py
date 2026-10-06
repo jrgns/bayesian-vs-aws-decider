@@ -67,6 +67,17 @@ def write_json(name: str, data: dict) -> Path:
     return path
 
 
+def decider_test_runs() -> dict[int, str]:
+    """{batch size: test run id}: the headline bs=1 run and, if different, the best-throughput run.
+
+    Derived from results/selected_labels.json and results/decider_best_bs.json, so analysis
+    stages follow whatever the label selection and sweep chose.
+    """
+    labels = json.loads((RESULTS_DIR / "selected_labels.json").read_text())["selected"]
+    best = json.loads((RESULTS_DIR / "decider_best_bs.json").read_text())["best_batch_size"]
+    return {bs: f"test_{labels}_bs{bs}" for bs in dict.fromkeys([1, int(best)])}
+
+
 def append_csv(path: Path, row: dict) -> None:
     """Append one row, writing the header on first use. Refuses if the columns changed."""
     path.parent.mkdir(parents=True, exist_ok=True)

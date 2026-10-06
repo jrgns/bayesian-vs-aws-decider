@@ -1,0 +1,9 @@
+{
+  "dev_accuracy": {
+    "v1": 0.6643356643356644,
+    "v2": 0.7012987012987013,
+    "v3": 0.7077922077922078
+  },
+  "rule": "highest dev accuracy at bs=1 (to 4 d.p.); ties go to the earlier version; at most v1, v2, v3 (config/labels/LOG.md)",
+  "selected": "v3"
+}

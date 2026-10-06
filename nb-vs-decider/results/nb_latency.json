@@ -1,0 +1,77 @@
+{
+  "batch_per_item_from_nb_runs": {
+    "mean_ms": 0.13569829527664334,
+    "per_seed_ms": [
+      0.13794644417626192,
+      0.12446078601112144,
+      0.138389150157948,
+      0.13532015666341027,
+      0.14237493937447512
+    ],
+    "source": "results/nb_runs.csv, is_best rows, predict_s / test size"
+  },
+  "batch_whole_test_this_run": {
+    "items": 9996,
+    "per_item_ms": 0.13858002031036765,
+    "total_s": 1.385245883022435
+  },
+  "config": {
+    "alpha": 0.3,
+    "min_df": 2,
+    "variant": "cnb_count"
+  },
+  "fit_s": 0.16944470803719014,
+  "loadavg": [
+    0.09619140625,
+    0.2841796875,
+    0.59765625
+  ],
+  "method": "pipeline.predict_proba([text]) per item, perf_counter, 1 thread, after 20 warmup calls; the first 1000 test items in split order",
+  "n_per_class": 100,
+  "n_train": 700,
+  "retrain_agreement_with_saved_preds": 1.0,
+  "seed": 0,
+  "single_item": {
+    "items": 1000,
+    "max_ms": 0.9644379606470466,
+    "mean_ms": 0.5006280154921114,
+    "min_ms": 0.38978399243205786,
+    "p50_ms": 0.49472699174657464,
+    "p95_ms": 0.5991455749608576,
+    "total_s": 0.5006280154921114
+  },
+  "threadpool_info": [
+    {
+      "filepath": "/opt/venv/lib/python3.12/site-packages/scikit_learn.libs/libgomp-e985bcbb.so.1.0.0",
+      "internal_api": "openmp",
+      "num_threads": 1,
+      "prefix": "libgomp",
+      "user_api": "openmp",
+      "version": null
+    },
+    {
+      "architecture": "Haswell",
+      "filepath": "/opt/venv/lib/python3.12/site-packages/scipy.libs/libscipy_openblas-5f890258.so",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libscipy_openblas",
+      "threading_layer": "pthreads",
+      "user_api": "blas",
+      "version": "0.3.31.dev"
+    },
+    {
+      "architecture": "Haswell",
+      "filepath": "/opt/venv/lib/python3.12/site-packages/numpy.libs/libscipy_openblas64_-f48b354e.so",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libscipy_openblas",
+      "threading_layer": "pthreads",
+      "user_api": "blas",
+      "version": "0.3.34.106.0"
+    }
+  ],
+  "threads": {
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+  }
+}
