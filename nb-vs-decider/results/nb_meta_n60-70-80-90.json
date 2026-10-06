@@ -1,0 +1,80 @@
+{
+  "finished_utc": "2026-10-06T15:51:18.988459+00:00",
+  "runtime_s": 840.4730790359899,
+  "args": {
+    "sizes": [
+      "60",
+      "70",
+      "80",
+      "90"
+    ],
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "measure_energy": true,
+    "idle_seconds": 60,
+    "min_window_s": 10.0,
+    "tag": ""
+  },
+  "threadpool_info": [
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libscipy_openblas",
+      "filepath": "/opt/venv/lib/python3.12/site-packages/numpy.libs/libscipy_openblas64_-f48b354e.so",
+      "version": "0.3.34.106.0",
+      "threading_layer": "pthreads",
+      "architecture": "Haswell"
+    },
+    {
+      "user_api": "openmp",
+      "internal_api": "openmp",
+      "num_threads": 1,
+      "prefix": "libgomp",
+      "filepath": "/opt/venv/lib/python3.12/site-packages/scikit_learn.libs/libgomp-e985bcbb.so.1.0.0",
+      "version": null
+    },
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libscipy_openblas",
+      "filepath": "/opt/venv/lib/python3.12/site-packages/scipy.libs/libscipy_openblas-5f890258.so",
+      "version": "0.3.31.dev",
+      "threading_layer": "pthreads",
+      "architecture": "Haswell"
+    }
+  ],
+  "idle_energy_id": "nb_n60_s0:idle",
+  "alphas": [
+    0.001,
+    0.003,
+    0.01,
+    0.03,
+    0.1,
+    0.3,
+    1.0
+  ],
+  "min_dfs": [
+    1,
+    2,
+    3
+  ],
+  "notes": {
+    "full_pool": "subset identical for all seeds; seeds only vary the CV fold shuffle",
+    "n=1": "no CV: defaults alpha=1.0, min_df=1; MNB+Count chosen as best by fixed rule; the tune phase is the 4 default fits",
+    "complement_nb": "predict_proba is a softmax of ComplementNB scores, not a calibrated probability; its Brier/ECE are not comparable to MultinomialNB's",
+    "tie_break": [
+      "mnb_count",
+      "mnb_tfidf",
+      "cnb_count",
+      "cnb_tfidf"
+    ],
+    "energy": "CPU RAPL package-0 attributed to NB; GPU counter recorded, not attributed"
+  }
+}

@@ -49,9 +49,11 @@ def style_axes(ax) -> None:
     ax.grid(axis="y", alpha=0.25)
 
 
-def learning_curve(runs: pd.DataFrame, decider: pd.Series, cross_n: int, pool_size: int) -> None:
+def learning_curve(
+    runs: pd.DataFrame, decider: pd.Series, cross_n: int, refined_n: int, pool_size: int
+) -> None:
     runs = runs.assign(n_per_class=runs["n_per_class"].astype(str))
-    xs = list(N_PER_CLASS)
+    xs = sorted(int(n) for n in runs["n_per_class"].unique() if n != FULL)  # every size run
     fig, ax = plt.subplots(figsize=(9, 5.5))
 
     best = runs[runs["is_best"]]
@@ -79,17 +81,34 @@ def learning_curve(runs: pd.DataFrame, decider: pd.Series, cross_n: int, pool_si
     ax.annotate("full pool (imbalanced)", (x_full, f_mean), textcoords="offset points",
                 xytext=(-8, -22), ha="right", fontsize=9, color=BLUE)  # fmt: skip
 
-    cx = xs.index(cross_n)
-    ax.axvline(cross_n, color=GREY, ls=":", lw=1)
-    ax.plot([cross_n], [m[cx]], "o", ms=11, mfc="none", mec="black", mew=1.8, zorder=5)
-    ax.annotate(f"crossover: {cross_n}/class\n({7 * cross_n} labelled examples)",
-                (cross_n, m[cx]), textcoords="offset points", xytext=(14, -42), fontsize=9,
-                arrowprops={"arrowstyle": "-", "color": "black"})  # fmt: skip
+    marks = [
+        (cross_n, f"crossover: {cross_n}/class\n({7 * cross_n} labelled examples)", "black",
+         (14, -42)),
+    ]  # fmt: skip
+    if refined_n != cross_n:
+        marks.append(
+            (
+                refined_n,
+                f"refined crossover: {refined_n}/class\n({7 * refined_n} labelled examples)",
+                VERMILLION,
+                (-14, 26),
+            )
+        )
+    for n, label, colour, off in marks:
+        i = xs.index(n)
+        ax.axvline(n, color=GREY, ls=":", lw=1)
+        ax.plot([n], [m[i]], "o", ms=11, mfc="none", mec=colour, mew=1.8, zorder=5)
+        ax.annotate(label, (n, m[i]), textcoords="offset points", xytext=off, fontsize=9,
+                    ha="left" if off[0] > 0 else "right", color=colour,
+                    arrowprops={"arrowstyle": "-", "color": colour})  # fmt: skip
 
     ax.set_xscale("log")
-    ticks = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000]
+    ticks = list(N_PER_CLASS)
     ax.set_xticks(ticks, [str(t) for t in ticks])
-    ax.minorticks_off()
+    minor = [n for n in xs if n not in ticks]
+    # Unlabelled minor ticks for the refinement sizes: labels would collide with 50 and 100.
+    ax.set_xticks(minor, minor=True)
+    ax.tick_params(axis="x", which="minor", length=3, labelbottom=False)
     ax.set_xlim(0.8, x_full * 1.6)
     ax.set_ylim(0.1, 0.86)
     ax.set_xlabel("Training examples per class (log scale)")
@@ -169,7 +188,8 @@ def main() -> None:
     pool_size = json.loads((RESULTS_DIR / "dataset_summary.json").read_text())["n_items"]["pool"]
     summary = pd.read_csv(RESULTS_DIR / "energy_summary.csv")
     cross_n = int(cross["crossover_n_per_class"])
-    learning_curve(runs, decider, cross_n, pool_size)
+    refined = cross.get("refined", {}).get("crossover_n_per_class")
+    learning_curve(runs, decider, cross_n, int(refined) if refined else cross_n, pool_size)
     energy_plot(summary, cross_n)
 
 

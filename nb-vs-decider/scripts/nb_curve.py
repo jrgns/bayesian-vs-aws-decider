@@ -45,7 +45,9 @@ from scripts.energy import Meter
 
 log = logging.getLogger(__name__)
 
-N_PER_CLASS = (1, 2, 5, 10, 20, 50, 100, 200, 500, 1000)
+N_PER_CLASS = (1, 2, 5, 10, 20, 50, 100, 200, 500, 1000)  # the pre-registered grid
+# Added after the main run to refine the crossover between 50 and 100 (same protocol, same seeds).
+REFINE_N_PER_CLASS = (60, 70, 80, 90)
 FULL = "full"
 SEEDS = (0, 1, 2, 3, 4)
 ALPHAS = (0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1.0)
@@ -62,6 +64,18 @@ VARIANTS: dict[str, tuple[type, type]] = {
     "cnb_count": (ComplementNB, CountVectorizer),
     "cnb_tfidf": (ComplementNB, TfidfVectorizer),
 }
+
+
+def refined_sizes(preds_dir=None, seeds=SEEDS) -> list[int]:
+    """Planned grid plus those refinement sizes whose best-preds exist for every seed, ascending."""
+    preds_dir = preds_dir or PREDS_DIR
+    extra = [
+        n
+        for n in REFINE_N_PER_CLASS
+        if all((preds_dir / f"{cell_name(n, s)}_best.parquet").exists() for s in seeds)
+    ]
+    return sorted({*N_PER_CLASS, *extra})
+
 
 SUBSETS_DIR = RESULTS_DIR / "nb" / "subsets"
 PREDS_DIR = RESULTS_DIR / "nb" / "preds"
@@ -372,6 +386,14 @@ def run_cell(n, seed, pool, test, args, meter, idle, runs_csv, best_path, idle_i
     return {"name": name, "best": best.variant}
 
 
+def meta_path(tag: str, sizes, results_dir=RESULTS_DIR):
+    """nb_meta<tag>.json, unless it exists: then a per-sizes file, so the first run's meta stays."""
+    path = results_dir / f"nb_meta{tag}.json"
+    if path.exists():
+        path = results_dir / f"nb_meta{tag}_n{'-'.join(map(str, sizes))}.json"
+    return path
+
+
 def main(argv=None) -> None:
     args = parse_args(argv)
     s = load_settings()
@@ -413,7 +435,7 @@ def main(argv=None) -> None:
             "energy": "CPU RAPL package-0 attributed to NB; GPU counter recorded, not attributed",
         },
     }
-    (RESULTS_DIR / f"nb_meta{args.tag}.json").write_text(json.dumps(meta, indent=2) + "\n")
+    meta_path(args.tag, args.sizes).write_text(json.dumps(meta, indent=2) + "\n")
     log.info("done in %.1f s", meta["runtime_s"])
 
 

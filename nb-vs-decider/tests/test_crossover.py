@@ -73,3 +73,28 @@ def test_mean_ci_and_bootstrap_ci_bracket_the_mean():
     vals = np.r_[np.ones(60), np.zeros(40)]
     lo, hi = bootstrap_mean_ci(vals, seed=1, n_boot=1000)
     assert lo < 0.6 < hi
+
+
+def _row(n, ok):
+    return {"n": n, "qualifies": ok, "gap_decider_minus_nb": 0.0}
+
+
+def test_summarise_run_grid_restricts_the_search():
+    per_n = [_row(50, False), _row(70, True), _row(100, True), _row("full", True)]
+    planned = cx.summarise_run("r", per_n, (50, 100))
+    refined = cx.summarise_run("r", per_n, (50, 70, 100))
+    assert planned["crossover_n_per_class"] == 100
+    assert [r["n"] for r in planned["per_n"]] == [50, 100]
+    assert refined["crossover_n_per_class"] == 70
+    assert refined["largest_n_below_crossover"]["n"] == 50
+
+
+def test_refined_sizes_needs_every_seed(tmp_path):
+    from scripts import nb_curve as nb
+
+    for s in nb.SEEDS:
+        (tmp_path / f"n60_s{s}_best.parquet").touch()
+    (tmp_path / "n70_s0_best.parquet").touch()
+    sizes = nb.refined_sizes(tmp_path)
+    assert 60 in sizes and 70 not in sizes
+    assert sizes == sorted([*nb.N_PER_CLASS, 60])

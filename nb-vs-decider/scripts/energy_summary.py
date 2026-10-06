@@ -18,7 +18,7 @@ import math
 import pandas as pd
 
 from scripts.common import RESULTS_DIR, decider_test_runs, load_settings, setup_logging
-from scripts.nb_curve import FULL, N_PER_CLASS
+from scripts.nb_curve import FULL
 from scripts.summary_stats import mean_ci
 
 log = logging.getLogger(__name__)
@@ -26,7 +26,7 @@ log = logging.getLogger(__name__)
 J_PER_KWH = 3.6e6
 MODES = ("gross", "marginal")
 TRAIN_KINDS = {"tune_fit": ("tune", "fit"), "fit_only": ("fit",)}
-BREAK_EVEN_N = (None, 1000)  # None = the crossover n
+EXTRA_N = (1000,)  # reported besides the crossover n (planned and, if different, refined)
 COLUMNS = ["table", "subject", "metric", "mode", "value", "ci_lo", "ci_hi", "unit", "note"]
 
 
@@ -71,8 +71,17 @@ class Inputs:
         self.energy_window_s = energy["duration_s"]
         self.latency = json.loads((r / "nb_latency.json").read_text())
         cross = json.loads((r / "crossover.json").read_text())
-        self.crossover_n = int(cross["headline"]["crossover_n_per_class"])
+        self.crossover_n = int(cross["headline"]["crossover_n_per_class"])  # planned grid
+        refined = cross["headline"].get("refined", {}).get("crossover_n_per_class")
+        self.refined_n = int(refined) if refined is not None else self.crossover_n
+        sizes = {int(n) for n in self.nb["n_per_class"] if n != FULL}
+        self.sizes = sorted(sizes)
         self.n_test = json.loads((r / "dataset_summary.json").read_text())["n_items"]["test"]
+
+    @property
+    def crossover_ns(self) -> list[int]:
+        """The planned-grid crossover n, then the refined one if it differs."""
+        return list(dict.fromkeys([self.crossover_n, self.refined_n]))
 
     def nb_cell(self, n) -> pd.DataFrame:
         return self.nb[self.nb["n_per_class"] == str(n)].sort_values("seed")
@@ -116,7 +125,7 @@ def add_inference(t: Table, inp: Inputs) -> None:
             for part in ("gpu", "cpu"):
                 t.add("inference", key, f"kwh_per_1000_predictions_{part}",
                       kwh(per[mode][part] * 1000), "kWh", mode)  # fmt: skip
-    for n in (inp.crossover_n, 1000, FULL):
+    for n in (*inp.crossover_ns, *EXTRA_N, FULL):
         for mode, vals in nb_infer_j_per_pred(inp, n).items():
             mean, lo, hi = mean_ci([kwh(v * 1000) for v in vals])
             t.add("inference", f"nb_n{n}", "kwh_per_1000_predictions", mean, "kWh", mode, (lo, hi),
@@ -137,7 +146,7 @@ def add_decider_load(t: Table, inp: Inputs) -> None:
 
 
 def add_nb_training(t: Table, inp: Inputs) -> None:
-    for n in (*N_PER_CLASS, FULL):
+    for n in (*inp.sizes, FULL):
         for kind in TRAIN_KINDS:
             for mode in MODES:
                 mean, lo, hi = mean_ci([kwh(j) for j in nb_train_j(inp, n, kind, mode)])
@@ -174,7 +183,7 @@ def add_timing(t: Table, inp: Inputs) -> None:
 def add_break_even(t: Table, inp: Inputs) -> None:
     for dkey in inp.runs:
         dec = decider_per_pred_j(inp, dkey)
-        for n in (inp.crossover_n if x is None else x for x in BREAK_EVEN_N):
+        for n in (*inp.crossover_ns, *EXTRA_N):
             nb_inf = nb_infer_j_per_pred(inp, n)
             for kind in TRAIN_KINDS:
                 for mode in MODES:

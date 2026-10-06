@@ -4,14 +4,18 @@ Every number below comes from a file in `results/` (named under each table). Not
 
 ## 1. Summary
 
-1. **Crossover.** With no training data, Decider 2B scores 0.7207 on the 7-class WOS-46985 test split. A tuned scikit-learn
-   Naive Bayes reaches that level somewhere between 50 and 100 labelled examples per class. The smallest grid point that meets the
-   rule is **100 per class (700 labelled examples)**. There NB scores 0.7476 [0.7384, 0.7568] and is significantly better than
-   Decider (McNemar) in 5 of 5 seeds. At 50 per class NB is 1.8 points behind [1.1, 2.6] and significantly worse in 5 of 5 seeds.
+1. **Crossover.** With no training data, Decider 2B scores 0.7207 on the 7-class WOS-46985 test split.
+   - **Pre-registered grid:** the smallest point that meets the rule is **100 per class (700 labelled examples)**. There NB scores
+     0.7476 [0.7384, 0.7568] and is significantly better than Decider (McNemar) in 5 of 5 seeds. At 50 per class NB is 1.8 points
+     behind [1.1, 2.6] and significantly worse in 5 of 5 seeds.
+   - **Refinement, added after the main run:** 60, 70, 80 and 90 per class, with the same protocol, seeds and host. The same rule
+     then gives **70 per class (490 labelled examples)**. That point is a statistical tie: NB 0.7228 [0.7114, 0.7343], a gap of
+     −0.2 points [−1.0, +0.5], with 4 of 5 seeds qualifying. From 80 per class onward NB is clearly ahead.
 2. **Energy.** Per 1,000 predictions, Decider uses 8.22 Wh gross (6.89 Wh marginal) on the RTX 3090 plus the CPU package.
    NB uses 1.47 mWh gross (0.75 mWh marginal) on the CPU package alone, about 5,600× (gross) to 9,200× (marginal) less.
    Training NB at 100 per class, including hyperparameter tuning, costs 85.9 mWh gross. That is about the energy of
-   **10 Decider predictions**, so the training cost is paid back after about 10 predictions. Human labelling effort is not counted.
+   **10 Decider predictions**, so the training cost is paid back after about 10 predictions. At the refined crossover (70 per class)
+   training costs 57 mWh, about 7 Decider predictions. Human labelling effort is not counted.
 3. **Stability.** NB never flips. Decider is bit-for-bit repeatable as long as its batch setup and option order stay fixed.
    Changing the batch size or the batch neighbours flips about 0.3% of predictions (all near-ties). Shuffling the option order
    flips 16.7% (reweighted estimate for the full test set; section 6).
@@ -78,7 +82,9 @@ The split sha256 hashes are in section 8. NB trains only on subsets of the pool.
 Both methods are scored on the same test items.
 
 **NB protocol** (`scripts/nb_curve.py`).
-- **Training sizes:** n ∈ {1, 2, 5, 10, 20, 50, 100, 200, 500, 1000} examples per class, with 5 seeds each (0–4). Subsets are drawn
+- **Training sizes:** n ∈ {1, 2, 5, 10, 20, 50, 100, 200, 500, 1000} examples per class, with 5 seeds each (0–4). This is the
+  pre-registered grid. After the main run, n ∈ {60, 70, 80, 90} were added to refine the crossover, with the same protocol, seeds and
+  host; results from these are marked "refined". The pre-registered result is reported unchanged. Subsets are drawn
   from the pool with stratified, seeded sampling (saved in `results/nb/subsets/`). The whole pool ("full") is one extra point.
 - **Variants:** {MultinomialNB, ComplementNB} × {CountVectorizer, TfidfVectorizer}, with ngram range (1, 2).
 - **Grid:** `alpha` ∈ {0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1} × `min_df` ∈ {1, 2, 3}, which is 21 points per variant.
@@ -146,12 +152,17 @@ Both methods are scored on the same test items.
 | 10 | 70 | 0.5306 [0.4929, 0.5682] | 0.5300 | 0.761 | 0.287 | cnb_tfidf ×2, mnb_tfidf, mnb_count, cnb_count |
 | 20 | 140 | 0.6155 [0.5918, 0.6392] | 0.6126 | 0.665 | 0.291 | cnb_tfidf ×3, mnb_tfidf, cnb_count |
 | 50 | 350 | 0.7024 [0.6935, 0.7114] | 0.7013 | 0.574 | 0.284 | cnb_count ×2, cnb_tfidf ×2, mnb_tfidf |
+| 60 (refined) | 420 | 0.7167 [0.7106, 0.7228] | 0.7157 | 0.519 | 0.256 | cnb_count ×3, cnb_tfidf ×2 |
+| **70** (refined crossover) | 490 | **0.7228 [0.7114, 0.7343]** | 0.7220 | 0.554 | 0.289 | cnb_count ×3, cnb_tfidf ×2 |
+| 80 (refined) | 560 | 0.7342 [0.7195, 0.7488] | 0.7330 | 0.477 | 0.225 | cnb_tfidf ×3, cnb_count ×2 |
+| 90 (refined) | 630 | 0.7385 [0.7263, 0.7506] | 0.7378 | 0.471 | 0.226 | cnb_tfidf ×3, cnb_count ×2 |
 | **100** | 700 | **0.7476 [0.7384, 0.7568]** | 0.7460 | 0.460 | 0.211 | cnb_count ×4, cnb_tfidf |
 | 200 | 1,400 | 0.7732 [0.7671, 0.7793] | 0.7726 | 0.427 | 0.207 | cnb_count ×5 |
 | 500 | 3,500 | 0.7951 [0.7909, 0.7993] | 0.7946 | 0.391 | 0.191 | cnb_count ×5 |
 | 1000 | 7,000 | 0.8000 [0.7976, 0.8024] | 0.7995 | 0.384 | 0.188 | cnb_count ×5 |
 | full pool | 34,733 | 0.7347 [0.7314, 0.7379] | 0.7284 | 0.466 | 0.187 | cnb_count ×3, cnb_tfidf ×2 |
 
+The 60–90 rows were added after the main run (same protocol, 5 seeds; `results/nb_meta_n60-70-80-90.json`).
 Source: `results/nb_runs.csv` (rows with `is_best`) and `nb_best_configs.json`. The "full pool" row is not part of the
 n-per-class series (see below). Its training set is the same for every seed, so its seeds only change the CV fold shuffle.
 
@@ -173,14 +184,26 @@ Civil → Mechanical (279), Electrical → Mechanical (247) and Psychology → M
 **Rule** (PLAN §6): the smallest n where (a) NB's mean accuracy is at least Decider's, and (b) for a majority of the 5 seeds,
 McNemar is either not significant at α = 0.05 or shows NB significantly better. The full pool is excluded from the search.
 
-**Result: n = 100 per class (700 labelled examples).** In the table, b/c means items only NB got right / items only Decider got
-right, per seed. At n = 100 every McNemar p-value is below 1e-5 in NB's favour, so all 5 seeds qualify.
+**Result on the pre-registered grid: n = 100 per class (700 labelled examples).** In the table, b/c means items only NB got right /
+items only Decider got right, per seed. At n = 100 every McNemar p-value is below 1e-5 in NB's favour, so all 5 seeds qualify.
+
+**Refinement (added after the main run, same protocol and seeds): n = 70 per class (490 labelled examples).** Applying the same rule to
+the grid plus 60, 70, 80 and 90 gives 70. It is a marginal tie, not a clear win:
+- NB's mean, 0.7228, is 0.2 points above Decider's, and the gap CI [−0.0099, +0.0053] includes zero.
+- Per seed, the McNemar p-values at 70 are 0.82, 0.022 (NB better), 0.040 (Decider better), 0.017 (NB better) and 0.48. So one seed
+  (seed 2) is significantly worse.
+- At 60, NB's mean (0.7167) is still below Decider's, so the rule fails there even though 4 of 5 seeds qualify.
+- From 80 per class onward every seed favours NB and the gap CI excludes zero.
 
 | n/class | NB mean | Decider | Gap, Decider − NB [95% CI] | Seeds qualifying | Seed 0 b/c | Seed 1 | Seed 2 | Seed 3 | Seed 4 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 20 | 0.6155 | 0.7207 | +0.1052 [+0.0973, +0.1132] | 0/5 | 1031/2271 | 999/1805 | 1033/2039 | 906/2155 | 1058/2014 |
 | 50 | 0.7024 | 0.7207 | +0.0183 [+0.0106, +0.0257] | 0/5 | 1111/1407 | 1019/1228 | 1013/1132 | 1154/1287 | 1130/1286 |
-| **100** | 0.7476 | 0.7207 | **−0.0269 [−0.0345, −0.0192]** | **5/5** | 1150/942 | 1304/1038 | 1338/943 | 1283/1060 | 1199/947 |
+| 60 (refined) | 0.7167 | 0.7207 | +0.0040 [−0.0037, +0.0116] | 4/5 | 1186/1204 | 1194/1304 | 1153/1133 | 1226/1256 | 1104/1166 |
+| **70** (refined) | 0.7228 | 0.7207 | **−0.0022 [−0.0099, +0.0053]** | **4/5** | 1140/1128 | 1185/1075 | 1021/1117 | 1241/1124 | 1136/1171 |
+| 80 (refined) | 0.7342 | 0.7207 | −0.0135 [−0.0212, −0.0059] | 5/5 | 1224/1165 | 1291/1036 | 1103/1049 | 1327/1056 | 1087/1053 |
+| 90 (refined) | 0.7385 | 0.7207 | −0.0178 [−0.0254, −0.0103] | 5/5 | 1152/1058 | 1261/1055 | 1180/995 | 1177/1097 | 1306/983 |
+| **100** (pre-registered) | 0.7476 | 0.7207 | **−0.0269 [−0.0345, −0.0192]** | **5/5** | 1150/942 | 1304/1038 | 1338/943 | 1283/1060 | 1199/947 |
 | 200 | 0.7732 | 0.7207 | −0.0525 [−0.0601, −0.0450] | 5/5 | 1322/819 | 1326/781 | 1321/806 | 1378/781 | 1284/819 |
 | 1000 | 0.8000 | 0.7207 | −0.0793 [−0.0871, −0.0716] | 5/5 | 1392/577 | 1379/587 | 1362/579 | 1360/553 | 1356/590 |
 
@@ -190,11 +213,12 @@ n = 1 to 10 are further behind, with gaps from +0.50 to +0.19 and 0/5 seeds qual
 The gap CI is a paired bootstrap over test items: Decider's per-item correctness minus NB's per-item correctness averaged over
 seeds. It captures test-set sampling noise, not variation between training subsets; that is the seed CI in the learning-curve table.
 
-- **Largest n below the crossover (50 per class):** NB trails by 1.83 points [1.06, 2.57]. The McNemar p-values per seed are 4.0e-9,
+- **Largest planned n below the pre-registered crossover (50 per class):** NB trails by 1.83 points [1.06, 2.57]. The McNemar p-values per seed are 4.0e-9,
   1.1e-5, 0.011, 0.0075 and 0.0016, and all five favour Decider.
-- **The true tie lies between 50 and 100 per class,** where the grid has no point. At 50 NB is significantly worse; at 100 it is
-  significantly better.
-- **Robustness (`test_v3_bs2`):** the crossover is the same, 100 per class with 5/5 seeds and a gap of −0.0279 [−0.0355, −0.0203].
+- **The tie lies near 70 per class.** The pre-registered grid had no point between 50 and 100, so it reported 100. The refinement puts
+  the crossover at 70.
+- **Robustness (`test_v3_bs2`):** the crossovers are the same. On the pre-registered grid it is 100 per class, with 5/5 seeds and a
+  gap of −0.0279 [−0.0355, −0.0203]. With the refinement it is 70 per class, with 5/5 seeds and a gap of −0.0032.
   At 50 per class all five p-values are below 0.021, with a gap of +0.0173 [+0.0096, +0.0247].
 - **Full pool (34,733 items, about 4,962 per class, imbalanced), reported separately:**
   - NB scores 0.7347 [0.7314, 0.7379] and beats Decider in all 5 seeds (b/c from 1205/1059 to 1231/1065; p from 0.0006 to 0.048,
@@ -212,7 +236,8 @@ Decider is much better calibrated than NB:
 | | Brier | ECE |
 | --- | --- | --- |
 | Decider, bs=1 | 0.392 | 0.037 |
-| NB, at the crossover | 0.460 | 0.211 |
+| NB, at the crossover (100) | 0.460 | 0.211 |
+| NB, at the refined crossover (70) | 0.554 | 0.289 |
 | NB, 1,000 per class | 0.384 | 0.188 |
 
 **ComplementNB's `predict_proba` is a softmax of complement-weighted scores, not a calibrated probability**
@@ -236,6 +261,10 @@ config is mostly ComplementNB, so the NB figures above mix both. Mean Brier / EC
 | 10 | 0.5159 | 0.5274 | 0.5351 | 0.5388 | 0.5306 |
 | 20 | 0.5937 | 0.6126 | 0.6031 | 0.6097 | 0.6155 |
 | 50 | 0.6649 | 0.6874 | 0.7041 | 0.7034 | 0.7024 |
+| 60 | 0.6854 | 0.7022 | 0.7145 | 0.7177 | 0.7167 |
+| 70 | 0.6872 | 0.7061 | 0.7238 | 0.7218 | 0.7228 |
+| 80 | 0.7011 | 0.7093 | 0.7363 | 0.7309 | 0.7342 |
+| 90 | 0.7059 | 0.7117 | 0.7395 | 0.7353 | 0.7385 |
 | 100 | 0.7104 | 0.7237 | 0.7485 | 0.7438 | 0.7476 |
 | 200 | 0.7367 | 0.7462 | 0.7732 | 0.7685 | 0.7732 |
 | 500 | 0.7563 | 0.7622 | 0.7951 | 0.7881 | 0.7951 |
@@ -298,6 +327,10 @@ Decider's own training energy is AWS's sunk cost and is out of scope.
 | 10 | 1.37e-05 (1.28e-05–1.45e-05) | 7.30e-06 (6.43e-06–8.16e-06) | 2.42e-07 (1.76e-07–3.07e-07) | 1.28e-07 (8.26e-08–1.74e-07) | 1.19 |
 | 20 | 2.05e-05 (1.91e-05–2.19e-05) | 1.06e-05 (9.39e-06–1.19e-05) | 4.47e-07 (3.39e-07–5.55e-07) | 2.24e-07 (1.67e-07–2.81e-07) | 1.84 |
 | 50 | 4.31e-05 (4.09e-05–4.53e-05) | 2.26e-05 (2.04e-05–2.49e-05) | 1.04e-06 (7.75e-07–1.31e-06) | 5.22e-07 (3.77e-07–6.68e-07) | 3.79 |
+| 60 | 5.35e-05 (4.90e-05–5.81e-05) | 2.80e-05 (2.59e-05–3.01e-05) | 1.20e-06 (8.50e-07–1.54e-06) | 6.10e-07 (4.48e-07–7.72e-07) | 4.71 |
+| **70** (refined) | **5.73e-05 (5.43e-05–6.02e-05)** | 2.89e-05 (2.59e-05–3.18e-05) | 1.31e-06 (9.43e-07–1.67e-06) | 6.69e-07 (4.72e-07–8.65e-07) | 5.23 |
+| 80 | 6.70e-05 (6.36e-05–7.04e-05) | 3.47e-05 (3.14e-05–3.81e-05) | 1.58e-06 (1.08e-06–2.08e-06) | 7.89e-07 (5.58e-07–1.02e-06) | 5.93 |
+| 90 | 7.44e-05 (7.18e-05–7.71e-05) | 3.78e-05 (3.52e-05–4.04e-05) | 1.69e-06 (1.13e-06–2.26e-06) | 8.57e-07 (5.26e-07–1.19e-06) | 6.74 |
 | **100** | **8.59e-05 (8.27e-05–8.90e-05)** | 4.68e-05 (4.46e-05–4.91e-05) | 1.72e-06 (1.57e-06–1.87e-06) | 8.90e-07 (7.40e-07–1.04e-06) | 7.28 |
 | 200 | 1.70e-04 (1.58e-04–1.81e-04) | 8.84e-05 (7.84e-05–9.84e-05) | 3.39e-06 (3.21e-06–3.57e-06) | 1.72e-06 (1.54e-06–1.90e-06) | 15.16 |
 | 500 | 4.37e-04 (3.87e-04–4.87e-04) | 2.29e-04 (1.80e-04–2.77e-04) | 8.32e-06 (7.99e-06–8.64e-06) | 4.10e-06 (3.81e-06–4.39e-06) | 38.83 |
@@ -323,6 +356,16 @@ propagates the CI of the training energy. Source: table `break_even`.
 | 1000/class | fit-only | 2.1 [2.0, 2.2] | 1.3 [1.1, 1.4] |
 
 Against Decider bs=2, N* is 11.4, 7.4, 0.23 and 0.14 at 100 per class, and 113, 70, 2.3 and 1.4 at 1000 per class.
+
+**At the refined crossover (70 per class):**
+- **Training:** 57.3 mWh gross [54.3, 60.2] (28.9 mWh marginal) with tuning, or 1.31 mWh gross (0.67 mWh marginal) for the refit
+  alone.
+- **Inference:** 1.537e-6 kWh per 1,000 predictions gross [1.455e-6, 1.619e-6] (8.00e-7 marginal). Decider bs=1 uses about 5,350×
+  (gross) and 8,610× (marginal) that.
+- **Break-even against Decider bs=1:** N* = 7.0 [6.6, 7.3] gross and 4.2 [3.8, 4.6] marginal with tuning, and 0.16 and 0.097 for the
+  refit alone. Against bs=2: 7.6, 4.6, 0.17 and 0.11.
+
+Source: `results/energy_summary.csv`, subjects `nb_n70` and `decider_bs1_vs_nb_n70`.
 
 Even with tuning included, NB's whole training cost is repaid within a few tens of predictions. The refit alone costs less than
 one Decider prediction.
@@ -383,6 +426,9 @@ the flip rate on the full test set. Details: [`stability/STABILITY.md`](stabilit
 - **WOS taxonomy ambiguity.** Depression and Schizophrenia appear under both Psychology and Medical, and other pairs are close
   (Biochemistry vs Medical, Civil vs Mechanical). Both methods face a ceiling below 100%, and Decider's errors concentrate on
   exactly these pairs.
+- **The refinement was added after the results were seen.** Sizes 60–90 were added after the planned grid showed the tie lies
+  between 50 and 100. They use the same protocol and seeds and select nothing by test score, but the refined crossover (70) is
+  post hoc. The pre-registered answer is 100 per class. At 70 the result is a tie whose CI includes zero.
 - **Full-pool imbalance.** The full pool is not part of the crossover search. It scores below 1,000 per class because of prior
   shift (section 4).
 - **ComplementNB calibration.** CNB's probabilities are not calibrated, so NB's Brier and ECE are not a fair comparison with
@@ -435,7 +481,7 @@ DRY_RUN=1 ALLOW_TEST=1 ./run_all.sh  # print each stage as skip / RUN; touches n
 with the selected wording, test runs at bs=1 and at the best batch size, NB curve, crossover, NB latency, energy summary and plots.
 - A stage is skipped when its output exists. Delete the file to rerun it.
 - `ALLOW_TEST=1` is required for every stage that touches test results, and no script sets it.
-- **Recorded run times:** about 79 minutes for the NB curve (`nb_meta.json`). Each Decider test run took 16–17 minutes of inference,
+- **Recorded run times:** about 79 minutes for the NB curve (`nb_meta.json`), plus 14 minutes for the 60–90 refinement (`nb_meta_n60-70-80-90.json`). Each Decider test run took 16–17 minutes of inference,
   plus 60 s idle baseline, 15 s load and 58 s warmup.
 - Lint and tests: `docker compose run --rm dev`.
 - The analysis stages (`crossover`, `energy_summary`, `plots`) are CPU only and need nothing but `results/`.

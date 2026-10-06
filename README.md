@@ -5,10 +5,10 @@ the **zero-shot** accuracy of [AWS Strands Decider 2B](https://huggingface.co/St
 on a text-classification task (WOS-46985, 7 classes), and what does each approach cost in energy?
 
 ## Headline results
-- **Crossover:** NB matches Decider (0.721 accuracy) between 50 and 100 examples per class. At 100 per class (700 labels) NB scores
-  0.748 and is significantly better (McNemar, 5/5 seeds); at 50 it is 1.8 points behind.
+- **Crossover:** NB matches Decider (0.721 accuracy) at about 70 examples per class (490 labels; refined grid, a statistical tie).
+  On the pre-registered grid the crossover is 100 per class (700 labels): NB scores 0.748 and is significantly better (McNemar, 5/5 seeds).
 - **Inference energy:** Decider 8.2 Wh per 1,000 predictions (GPU + CPU package, gross); NB 1.5 mWh (CPU only), about 5,600x less.
-- **Break-even:** NB's training energy at the crossover (86 mWh with tuning) is repaid after about 10 predictions.
+- **Break-even:** NB's training energy (with tuning) is repaid after about 7 predictions at 70/class, or 10 at 100/class.
 
 Full write-up, tables, threats to validity and versions: [`nb-vs-decider/REPORT.md`](nb-vs-decider/REPORT.md).
 Plots: `nb-vs-decider/plots/learning_curve.png`, `nb-vs-decider/plots/energy.png`. Plan and decision log: [`docs/PLAN.md`](docs/PLAN.md).

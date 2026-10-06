@@ -13,6 +13,8 @@ inference,decider_bs2,kwh_per_1000_predictions_gpu,marginal,0.005796365563886589
 inference,decider_bs2,kwh_per_1000_predictions_cpu,marginal,0.0005351009853144283,,,kWh,
 inference,nb_n100,kwh_per_1000_predictions,gross,1.4726300422946957e-06,1.3855183733290856e-06,1.5597417112603058e-06,kWh,CPU package only; mean and 95% t-CI over 5 seeds
 inference,nb_n100,kwh_per_1000_predictions,marginal,7.509378221757905e-07,6.579643322279321e-07,8.43911312123649e-07,kWh,CPU package only; mean and 95% t-CI over 5 seeds
+inference,nb_n70,kwh_per_1000_predictions,gross,1.5372550874516472e-06,1.4550496996626053e-06,1.619460475240689e-06,kWh,CPU package only; mean and 95% t-CI over 5 seeds
+inference,nb_n70,kwh_per_1000_predictions,marginal,8.000804023337449e-07,7.102662298250467e-07,8.89894574842443e-07,kWh,CPU package only; mean and 95% t-CI over 5 seeds
 inference,nb_n1000,kwh_per_1000_predictions,gross,1.627182094266278e-06,1.5486056807332884e-06,1.7057585077992677e-06,kWh,CPU package only; mean and 95% t-CI over 5 seeds
 inference,nb_n1000,kwh_per_1000_predictions,marginal,8.090386631730236e-07,7.210211719059671e-07,8.970561544400801e-07,kWh,CPU package only; mean and 95% t-CI over 5 seeds
 inference,nb_nfull,kwh_per_1000_predictions,gross,2.0561034373008464e-06,1.9137312447988336e-06,2.198475629802859e-06,kWh,CPU package only; mean and 95% t-CI over 5 seeds
@@ -65,6 +67,30 @@ nb_training,nb_n50,train_kwh_fit_only,gross,1.0409626253894074e-06,7.74745260789
 nb_training,nb_n50,train_kwh_fit_only,marginal,5.223620722185698e-07,3.7691245620535733e-07,6.678116882317822e-07,kWh,CPU package only; mean and 95% t-CI over 5 seeds
 nb_training,nb_n50,train_wall_s_tune,,3.794276486795085,3.689140853030012,3.899412120560158,s,metering window / repeats
 nb_training,nb_n50,train_wall_s_fit,,0.09868459728425828,0.07527944017310376,0.12208975439541281,s,metering window / repeats
+nb_training,nb_n60,train_kwh_tune_fit,gross,5.353189848639695e-05,4.899697619778222e-05,5.806682077501168e-05,kWh,CPU package only; mean and 95% t-CI over 5 seeds
+nb_training,nb_n60,train_kwh_tune_fit,marginal,2.7960361790897293e-05,2.5859680327696337e-05,3.006104325409825e-05,kWh,CPU package only; mean and 95% t-CI over 5 seeds
+nb_training,nb_n60,train_kwh_fit_only,gross,1.1951256808413953e-06,8.496300140276754e-07,1.5406213476551151e-06,kWh,CPU package only; mean and 95% t-CI over 5 seeds
+nb_training,nb_n60,train_kwh_fit_only,marginal,6.099381262600163e-07,4.4794144986577693e-07,7.719348026542558e-07,kWh,CPU package only; mean and 95% t-CI over 5 seeds
+nb_training,nb_n60,train_wall_s_tune,,4.708775642762581,4.129074687988854,5.288476597536309,s,metering window / repeats
+nb_training,nb_n60,train_wall_s_fit,,0.11028089329577528,0.07553376857219517,0.1450280180193554,s,metering window / repeats
+nb_training,nb_n70,train_kwh_tune_fit,gross,5.725022000144363e-05,5.432833686621387e-05,6.0172103136673395e-05,kWh,CPU package only; mean and 95% t-CI over 5 seeds
+nb_training,nb_n70,train_kwh_tune_fit,marginal,2.8873559995764772e-05,2.5948316335159964e-05,3.179880365636958e-05,kWh,CPU package only; mean and 95% t-CI over 5 seeds
+nb_training,nb_n70,train_kwh_fit_only,gross,1.3066790847769669e-06,9.430958318651128e-07,1.670262337688821e-06,kWh,CPU package only; mean and 95% t-CI over 5 seeds
+nb_training,nb_n70,train_kwh_fit_only,marginal,6.686830003656013e-07,4.724872724424775e-07,8.648787282887253e-07,kWh,CPU package only; mean and 95% t-CI over 5 seeds
+nb_training,nb_n70,train_wall_s_tune,,5.227460174297448,5.119367957495149,5.335552391099747,s,metering window / repeats
+nb_training,nb_n70,train_wall_s_fit,,0.12023286817578385,0.08763734809937326,0.15282838825219444,s,metering window / repeats
+nb_training,nb_n80,train_kwh_tune_fit,gross,6.697558859736543e-05,6.356576916102367e-05,7.038540803370719e-05,kWh,CPU package only; mean and 95% t-CI over 5 seeds
+nb_training,nb_n80,train_kwh_tune_fit,marginal,3.4739676528381995e-05,3.1384525236185114e-05,3.8094827820578875e-05,kWh,CPU package only; mean and 95% t-CI over 5 seeds
+nb_training,nb_n80,train_kwh_fit_only,gross,1.576443847365429e-06,1.0764719308440442e-06,2.0764157638868137e-06,kWh,CPU package only; mean and 95% t-CI over 5 seeds
+nb_training,nb_n80,train_kwh_fit_only,marginal,7.891186197300243e-07,5.584524672683583e-07,1.0197847721916903e-06,kWh,CPU package only; mean and 95% t-CI over 5 seeds
+nb_training,nb_n80,train_wall_s_tune,,5.926609721279237,5.67586866158895,6.177350780969524,s,metering window / repeats
+nb_training,nb_n80,train_wall_s_fit,,0.14837453178587295,0.096934528708075,0.1998145348636709,s,metering window / repeats
+nb_training,nb_n90,train_kwh_tune_fit,gross,7.443092605887889e-05,7.175164754870731e-05,7.711020456905047e-05,kWh,CPU package only; mean and 95% t-CI over 5 seeds
+nb_training,nb_n90,train_kwh_tune_fit,marginal,3.781993274182056e-05,3.52147108998289e-05,4.042515458381222e-05,kWh,CPU package only; mean and 95% t-CI over 5 seeds
+nb_training,nb_n90,train_kwh_fit_only,gross,1.690835364434432e-06,1.125329392239365e-06,2.2563413366294987e-06,kWh,CPU package only; mean and 95% t-CI over 5 seeds
+nb_training,nb_n90,train_kwh_fit_only,marginal,8.567307360142802e-07,5.255096306569897e-07,1.187951841371571e-06,kWh,CPU package only; mean and 95% t-CI over 5 seeds
+nb_training,nb_n90,train_wall_s_tune,,6.742295206105337,6.675910411473966,6.808680000736707,s,metering window / repeats
+nb_training,nb_n90,train_wall_s_fit,,0.15719029361469966,0.11250492797447785,0.20187565925492146,s,metering window / repeats
 nb_training,nb_n100,train_kwh_tune_fit,gross,8.587678796872933e-05,8.271616106569686e-05,8.90374148717618e-05,kWh,CPU package only; mean and 95% t-CI over 5 seeds
 nb_training,nb_n100,train_kwh_tune_fit,marginal,4.6806470322980525e-05,4.4560975958032564e-05,4.9051964687928486e-05,kWh,CPU package only; mean and 95% t-CI over 5 seeds
 nb_training,nb_n100,train_kwh_fit_only,gross,1.7228685798404446e-06,1.571729417220864e-06,1.8740077424600252e-06,kWh,CPU package only; mean and 95% t-CI over 5 seeds
@@ -109,6 +135,10 @@ break_even,decider_bs1_vs_nb_n100,break_even_predictions_tune_fit,gross,10.45023
 break_even,decider_bs1_vs_nb_n100,break_even_predictions_tune_fit,marginal,6.794710301435034,6.468740759445553,7.120679843424515,predictions,"N* = NB train / (Decider infer - NB infer), per prediction; CI from the training-energy CI"
 break_even,decider_bs1_vs_nb_n100,break_even_predictions_fit_only,gross,0.20965367845667388,0.19126174666754636,0.2280456102458014,predictions,"N* = NB train / (Decider infer - NB infer), per prediction; CI from the training-energy CI"
 break_even,decider_bs1_vs_nb_n100,break_even_predictions_fit_only,marginal,0.1292360618711854,0.10746359040397278,0.151008533338398,predictions,"N* = NB train / (Decider infer - NB infer), per prediction; CI from the training-energy CI"
+break_even,decider_bs1_vs_nb_n70,break_even_predictions_tune_fit,gross,6.966760986880266,6.611197961371739,7.322324012388793,predictions,"N* = NB train / (Decider infer - NB infer), per prediction; CI from the training-energy CI"
+break_even,decider_bs1_vs_nb_n70,break_even_predictions_tune_fit,marginal,4.191490487692183,3.766841397680234,4.61613957770413,predictions,"N* = NB train / (Decider infer - NB infer), per prediction; CI from the training-energy CI"
+break_even,decider_bs1_vs_nb_n70,break_even_predictions_fit_only,gross,0.1590093604874712,0.11476503056515032,0.20325369040979208,predictions,"N* = NB train / (Decider infer - NB infer), per prediction; CI from the training-energy CI"
+break_even,decider_bs1_vs_nb_n70,break_even_predictions_fit_only,marginal,0.09707076078339498,0.06858959921425556,0.1255519223525344,predictions,"N* = NB train / (Decider infer - NB infer), per prediction; CI from the training-energy CI"
 break_even,decider_bs1_vs_nb_n1000,break_even_predictions_tune_fit,gross,104.07834730402946,100.09436157399523,108.06233303406368,predictions,"N* = NB train / (Decider infer - NB infer), per prediction; CI from the training-energy CI"
 break_even,decider_bs1_vs_nb_n1000,break_even_predictions_tune_fit,marginal,64.0466054508797,59.499580061294836,68.59363084046454,predictions,"N* = NB train / (Decider infer - NB infer), per prediction; CI from the training-energy CI"
 break_even,decider_bs1_vs_nb_n1000,break_even_predictions_fit_only,gross,2.103778335112598,2.00468321653334,2.202873453691856,predictions,"N* = NB train / (Decider infer - NB infer), per prediction; CI from the training-energy CI"
@@ -117,6 +147,10 @@ break_even,decider_bs2_vs_nb_n100,break_even_predictions_tune_fit,gross,11.37253
 break_even,decider_bs2_vs_nb_n100,break_even_predictions_tune_fit,marginal,7.393551250169962,7.0388529028122155,7.748249597527708,predictions,"N* = NB train / (Decider infer - NB infer), per prediction; CI from the training-energy CI"
 break_even,decider_bs2_vs_nb_n100,break_even_predictions_fit_only,gross,0.22815694721320703,0.20814181062580847,0.24817208380060563,predictions,"N* = NB train / (Decider infer - NB infer), per prediction; CI from the training-energy CI"
 break_even,decider_bs2_vs_nb_n100,break_even_predictions_fit_only,marginal,0.14062607593629742,0.11693472244302165,0.16431742942957317,predictions,"N* = NB train / (Decider infer - NB infer), per prediction; CI from the training-energy CI"
+break_even,decider_bs2_vs_nb_n70,break_even_predictions_tune_fit,gross,7.581627156080165,7.1946831666179065,7.968571145542424,predictions,"N* = NB train / (Decider infer - NB infer), per prediction; CI from the training-energy CI"
+break_even,decider_bs2_vs_nb_n70,break_even_predictions_tune_fit,marginal,4.560903680216132,4.098828529831546,5.022978830600718,predictions,"N* = NB train / (Decider infer - NB infer), per prediction; CI from the training-energy CI"
+break_even,decider_bs2_vs_nb_n70,break_even_predictions_fit_only,gross,0.1730430666148919,0.12489386013668159,0.22119227309310224,predictions,"N* = NB train / (Decider infer - NB infer), per prediction; CI from the training-energy CI"
+break_even,decider_bs2_vs_nb_n70,break_even_predictions_fit_only,marginal,0.10562600378037157,0.07463468100415299,0.13661732655659015,predictions,"N* = NB train / (Decider infer - NB infer), per prediction; CI from the training-energy CI"
 break_even,decider_bs2_vs_nb_n1000,break_even_predictions_tune_fit,gross,113.26411052180626,108.92850554985428,117.59971549375824,predictions,"N* = NB train / (Decider infer - NB infer), per prediction; CI from the training-energy CI"
 break_even,decider_bs2_vs_nb_n1000,break_even_predictions_tune_fit,marginal,69.69130261510979,64.74352872150067,74.6390765087189,predictions,"N* = NB train / (Decider infer - NB infer), per prediction; CI from the training-energy CI"
 break_even,decider_bs2_vs_nb_n1000,break_even_predictions_fit_only,gross,2.2894539357500885,2.181612864541053,2.397295006959124,predictions,"N* = NB train / (Decider infer - NB infer), per prediction; CI from the training-energy CI"

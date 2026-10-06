@@ -109,8 +109,17 @@ if [ "$BEST" != "1" ]; then
 fi
 test_stage nb results/nb_runs.csv nb_curve --measure-energy
 
+# ---- 5b. NB refinement (added after the main run, same protocol): 60-90 per class x seeds 0-4 ----
+# Appends to nb_runs.csv / energy.csv and merges nb_best_configs.json; the pre-registered grid
+# result (section 6) is reported separately from the refined one. Keyed on the last cell's preds.
+test_stage nb results/nb/preds/n90_s4_best.parquet nb_curve --sizes 60 70 80 90 --measure-energy
+
 # ---- 6. analysis: crossover, NB latency, energy summary, plots ----
-test_stage cpu results/crossover.json crossover
+# crossover / energy_summary / plots also rerun when stage 5b's outputs are newer than theirs.
+cross_done() { [ results/crossover.json -nt results/nb/preds/n90_s4_best.parquet ]; }
+summary_done() { [ results/energy_summary.csv -nt results/crossover.json ]; }
+plots_done() { [ plots/learning_curve.png -nt results/energy_summary.csv ]; }
+test_stage cpu @cross_done crossover
 test_stage nb results/nb_latency.json nb_latency
-test_stage cpu results/energy_summary.csv energy_summary
-test_stage cpu plots/learning_curve.png plots
+test_stage cpu @summary_done energy_summary
+test_stage cpu @plots_done plots

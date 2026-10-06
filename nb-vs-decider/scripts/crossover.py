@@ -7,6 +7,8 @@ per-item correctness with a Decider test run on identical item_ids (PLAN section
 Crossover rule: the smallest n where NB's mean accuracy >= Decider's AND, for a majority of the
 seeds, McNemar is not significant at ALPHA or NB is significantly better.
 The full imbalanced pool is reported separately and never enters the "smallest n" search.
+The rule is applied twice: on the pre-registered grid (N_PER_CLASS; the headline result) and on
+the refined grid (that grid plus the refinement sizes added after the main run; key "refined").
 Writes results/crossover.csv (one row per run x n x seed) and results/crossover.json.
 """
 
@@ -21,7 +23,7 @@ import pandas as pd
 
 from scripts import metrics
 from scripts.common import RESULTS_DIR, decider_test_runs, load_settings, setup_logging
-from scripts.nb_curve import FULL, N_PER_CLASS, PREDS_DIR, SEEDS
+from scripts.nb_curve import FULL, N_PER_CLASS, PREDS_DIR, SEEDS, refined_sizes
 from scripts.summary_stats import bootstrap_mean_ci, mean_ci
 
 log = logging.getLogger(__name__)
@@ -144,9 +146,12 @@ def analyse_run(run_id: str, sizes, seeds) -> tuple[list[dict], list[dict]]:
     return rows, per_n
 
 
-def summarise_run(run_id: str, per_n: list[dict]) -> dict:
-    """Crossover and the gap one grid step below it (search covers numeric sizes only)."""
-    search = sorted((r for r in per_n if r["n"] != FULL), key=lambda r: r["n"])
+def summarise_run(run_id: str, per_n: list[dict], grid=None) -> dict:
+    """Crossover and the gap one grid step below it (search covers numeric sizes in `grid`)."""
+    search = sorted(
+        (r for r in per_n if r["n"] != FULL and (grid is None or r["n"] in grid)),
+        key=lambda r: r["n"],
+    )
     cross = find_crossover(search)
     below = [r for r in search if cross is not None and r["n"] < cross]
     return {
@@ -196,7 +201,8 @@ def main(argv=None) -> None:
     args = ap.parse_args(argv)
     setup_logging(load_settings().log_level)
 
-    sizes, seeds = [*N_PER_CLASS, FULL], list(SEEDS)
+    refined = refined_sizes()
+    sizes, seeds = [*refined, FULL], list(SEEDS)
     all_rows, summaries = [], {}
     # Headline = the bs=1 run; robustness = the best-throughput batch size (absent if that is 1).
     roles = zip(("headline", "robustness"), decider_test_runs().values(), strict=False)
@@ -204,10 +210,12 @@ def main(argv=None) -> None:
         rows, per_n = analyse_run(run_id, sizes, seeds)
         all_rows += rows
         full = next(r for r in per_n if r["n"] == FULL)
-        summaries[role] = summarise_run(run_id, per_n)
+        summaries[role] = summarise_run(run_id, per_n, N_PER_CLASS)
+        summaries[role]["refined"] = summarise_run(run_id, per_n, refined)
         summaries[role]["full_pool"] = full_pool_report(run_id, full, summaries[role])
-        log.info("%s (%s): crossover at n=%s per class", role, run_id,
-                 summaries[role]["crossover_n_per_class"])  # fmt: skip
+        log.info("%s (%s): crossover at n=%s per class (planned grid), %s (refined grid)", role,
+                 run_id, summaries[role]["crossover_n_per_class"],
+                 summaries[role]["refined"]["crossover_n_per_class"])  # fmt: skip
 
     pd.DataFrame(all_rows).to_csv(RESULTS_DIR / f"{args.out_prefix}.csv", index=False)
     out = {
@@ -218,6 +226,11 @@ def main(argv=None) -> None:
         "gap_definition": "Decider accuracy minus NB mean accuracy over seeds; the CI is a paired "
         "percentile bootstrap over test items (10,000 resamples) of the per-item difference",
         "seeds": seeds,
+        "planned_grid": list(N_PER_CLASS),
+        "refined_grid": refined,
+        "grid_note": "Top-level crossover_n_per_class / per_n of each run use the planned grid "
+        "(the pre-registered result). The 'refined' sub-key applies the same rule to the planned "
+        "grid plus the sizes added after the main run.",
         **summaries,
     }
     (RESULTS_DIR / f"{args.out_prefix}.json").write_text(json.dumps(out, indent=2) + "\n")

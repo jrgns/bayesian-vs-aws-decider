@@ -163,3 +163,26 @@ def test_slow_phase_runs_once():
 
     _, reps = nb.run_repeated(fn, 10.0, clock)
     assert reps == 1 == len(n)
+
+
+def test_meta_path_keeps_existing_meta(tmp_path):
+    assert nb.meta_path("", ["60", "70"], tmp_path) == tmp_path / "nb_meta.json"
+    (tmp_path / "nb_meta.json").write_text("{}")
+    assert nb.meta_path("", ["60", "70"], tmp_path) == tmp_path / "nb_meta_n60-70.json"
+
+
+def test_update_best_configs_merges_and_runs_csv_appends(tmp_path):
+    from scripts.common import append_csv
+
+    best = SimpleNamespace(variant="cnb_count", alpha=0.1, min_df=2)
+    path = tmp_path / "cfg.json"
+    path.write_text('{"n50_s0": {"variant": "mnb_count", "alpha": 1.0, "min_df": 1}}\n')
+    nb.update_best_configs(path, "n60_s0", best)
+    import json
+
+    cfg = json.loads(path.read_text())
+    assert set(cfg) == {"n50_s0", "n60_s0"} and cfg["n50_s0"]["variant"] == "mnb_count"
+    csv_path = tmp_path / "runs.csv"
+    append_csv(csv_path, {"n": 50})
+    append_csv(csv_path, {"n": 60})
+    assert csv_path.read_text().splitlines() == ["n", "50", "60"]
