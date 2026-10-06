@@ -1,0 +1,28 @@
+# Decider label wording, version 1.
+# Written 2026-10-06 BEFORE any Decider output on this dataset was seen (dev or test).
+# Rules (docs/PLAN.md §4): later versions may only reword, never add examples, and are scored on dev only.
+# Keys are the canonical label ids from data/splits (0-6); names match dataset_summary.json.
+version: 1
+instructions: "Which field of science or engineering is this research abstract from?"
+labels:
+  0:
+    name: Computer Science
+    description: "Research on computing: algorithms, software, data, networks, machine learning and artificial intelligence."
+  1:
+    name: Electrical Engineering
+    description: "Research on electrical and electronic systems: circuits, power systems, signal processing, communications and control."
+  2:
+    name: Psychology
+    description: "Research on the mind and behaviour: cognition, emotion, personality, development and mental health."
+  3:
+    name: Mechanical Engineering
+    description: "Research on mechanical and aerospace systems: machines, materials, manufacturing, fluid mechanics and heat transfer."
+  4:
+    name: Civil Engineering
+    description: "Research on the built environment: structures, construction, geotechnics, transport infrastructure and water resources."
+  5:
+    name: Medical Science
+    description: "Research on human health and disease: clinical studies, diagnosis, treatment and medical conditions."
+  6:
+    name: Biochemistry
+    description: "Research on the chemistry of living things: molecules, proteins, genes, enzymes and cellular processes."
