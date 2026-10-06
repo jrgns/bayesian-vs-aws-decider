@@ -1,6 +1,6 @@
 # Plan — Determinism and stability test (NB vs Decider)
 
-Status: **DRAFT — awaiting approval. BLOCKED on the main benchmark.** Written 2026-10-06.
+Status: **APPROVED 2026-10-06. BLOCKED on the main benchmark.** Decisions: D6 runs in both forms (D6a, D6b), separate processes, reweighted flip rate is the headline.
 
 ## Dependency (why this can't run yet)
 `nb-vs-decider/` currently holds only the step-1 scaffolding: Docker, pins and the Decider smoke test. There is no
@@ -43,7 +43,8 @@ serving and also catches load-time nondeterminism. Item order is canonical unles
 | D3 | D2 + `torch.use_deterministic_algorithms(True)`, `CUBLAS_WORKSPACE_CONFIG=:4096:8`, `cudnn.benchmark=False`, fixed seeds | 10 | Env and flags set **before** CUDA initialises. If an op raises because it has no deterministic implementation, that is recorded as a finding. Then it is re-run with `warn_only=True`, labelled D3w |
 | D4 | Batch size 1 vs throughput batch size | 0 new | Compares D1 run *i* with D2 run *i*, plus the flip rate over the pooled D1 ∪ D2 runs |
 | D5 | Option order shuffled per run (seed = run index) at the throughput batch size | 5 | Mapped back to canonical labels. Read against D2 as baseline |
-| D6 | Item order permuted **within each batch** (same batch composition), throughput batch size | 5 | See open question 1 |
+| D6a | Item order permuted **within each batch** (same batch composition), throughput batch size | 5 | |
+| D6b | Whole subset shuffled before batching (different batch neighbours and padding), throughput batch size | 5 | Realistic serving variation |
 
 If NB never reaches Decider (no crossover), N1 and N2 use the best NB config at the full pool, and this is stated.
 
@@ -84,15 +85,10 @@ product. If any flip or bit difference shows up, the investigation goes in this 
 - GPU-idle preflight before any Decider run. If llama-swap/vLLM holds the GPU, **stop and ask**. Never kill anything.
 
 ## Estimated cost
-About 1,000 items × (10 + 10 + 10 + 5 + 5) runs. At roughly 100 ms per item at batch size 1 and much faster when
+About 1,000 items × (10 + 10 + 10 + 5 + 5 + 5) runs. At roughly 100 ms per item at batch size 1 and much faster when
 batched, that is roughly **45–75 min of GPU time** on one 3090. NB takes seconds.
 
-## Open questions
-1. **D6 interpretation.** "Shuffle within batches" can mean:
-   - (a) the same batch members in a different order, which is my default and the literal reading; or
-   - (b) shuffling the whole subset, so each item gets different batch neighbours and padding.
-
-   Option (b) is the more realistic serving variation. I'd run both if you agree (D6a/D6b, +5 runs, about 5 min).
-2. **Separate processes vs in-process repeats for D1–D3.** I've defaulted to separate processes, which is the
-   superset. Say if you want in-process repeats instead or as well.
-3. **Reweighted flip rate** as the headline number in `REPORT.md`: OK?
+## Decisions (2026-10-06)
+1. D6: both readings are run, as D6a (within-batch) and D6b (whole-subset shuffle).
+2. D1–D3: each run is a separate process.
+3. The reweighted flip rate (near-boundary 10% / rest 90%) is the headline figure in `REPORT.md`.
