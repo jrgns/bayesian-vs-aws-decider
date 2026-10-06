@@ -76,3 +76,17 @@ if [ "${ALLOW_TEST:-}" = "1" ]; then
 else
   echo "skip test-split Decider runs (ALLOW_TEST=1 not set)"
 fi
+
+# NB learning curve (single-process, pinned to one thread; CPU RAPL energy). Evaluates on the test
+# split, so it needs ALLOW_TEST=1 like the Decider test runs.
+if [ "${ALLOW_TEST:-}" = "1" ]; then
+  if [ -e results/nb_runs.csv ]; then
+    echo "skip nb_curve (found results/nb_runs.csv)"
+  else
+    ./preflight_host.sh
+    docker compose run --rm -e OMP_NUM_THREADS=1 -e OPENBLAS_NUM_THREADS=1 -e MKL_NUM_THREADS=1 \
+      pipeline python -m scripts.nb_curve --measure-energy
+  fi
+else
+  echo "skip nb_curve (ALLOW_TEST=1 not set)"
+fi
