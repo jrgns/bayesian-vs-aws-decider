@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import csv
 import json
 import logging
 import os
@@ -64,6 +65,22 @@ def write_json(name: str, data: dict) -> Path:
     path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n")
     log.info("wrote %s", path)
     return path
+
+
+def append_csv(path: Path, row: dict) -> None:
+    """Append one row, writing the header on first use. Refuses if the columns changed."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fresh = not path.exists() or path.stat().st_size == 0
+    if not fresh:
+        with path.open(newline="") as fh:
+            header = next(csv.reader(fh))
+        if header != list(row):
+            raise ValueError(f"{path}: columns changed: {header} != {list(row)}")
+    with path.open("a", newline="") as fh:
+        writer = csv.DictWriter(fh, fieldnames=list(row))
+        if fresh:
+            writer.writeheader()
+        writer.writerow(row)
 
 
 def _open_url(url: str):

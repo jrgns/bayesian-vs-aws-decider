@@ -9,6 +9,8 @@ services:
     # DECIDER_IMAGE is set by run_all.sh (image id) and recorded in versions.json.
     environment:
       - DECIDER_IMAGE
+      - ALLOW_TEST
+      - HOST_CONTAINERS_RUNNING
     env_file:
       - path: .env
         required: false
@@ -22,6 +24,7 @@ services:
               capabilities: [gpu]
     volumes:
       - /sys/devices/virtual/powercap:/host/powercap:ro
+      - ./data:/app/data:ro
       - ./results:/app/results
       - ./plots:/app/plots
       - hf-cache:/cache/hf
@@ -50,6 +53,7 @@ services:
     volumes:
       - ./scripts:/app/scripts
       - ./tests:/app/tests
+      - ./config:/app/config
       - ./pyproject.toml:/app/pyproject.toml
     command: sh -c "ruff check . && ruff format --check . && pytest -q"
 

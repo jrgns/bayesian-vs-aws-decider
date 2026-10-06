@@ -8,7 +8,7 @@ docker compose build pipeline
 DECIDER_IMAGE=$(docker image inspect nb-vs-decider:dev --format '{{.Id}}')
 export DECIDER_IMAGE
 # Create host-owned dirs first: containers run as root and would otherwise own them.
-mkdir -p results plots data/raw data/processed data/splits
+mkdir -p results/decider results/power_samples plots data/raw data/processed data/splits
 
 # stage OUTPUT_FILE SERVICE MODULE [ARGS...]: run a stage unless its output already exists.
 stage() {
@@ -18,6 +18,19 @@ stage() {
     echo "skip ${module} ${*:-} (found ${out})"
   else
     docker compose run --rm "$service" python -m "scripts.${module}" "$@"
+  fi
+}
+
+# gpu_stage OUTPUT_FILE MODULE [ARGS...]: like stage, on the pipeline service, with the host GPU
+# preflight run right before (and only when the stage actually runs).
+gpu_stage() {
+  local out=$1 module=$2
+  shift 2
+  if [ -e "$out" ]; then
+    echo "skip ${module} ${*:-} (found ${out})"
+  else
+    ./preflight_host.sh
+    docker compose run --rm pipeline python -m "scripts.${module}" "$@"
   fi
 }
 
@@ -40,3 +53,26 @@ for module in versions decider_smoke; do
   # later stages (decider_run, nb_curve, energy, report) are appended here
   docker compose run --rm pipeline python -m "scripts.${module}"
 done
+
+# Noise indicator for the energy records (a container cannot see the host's docker daemon).
+HOST_CONTAINERS_RUNNING=$(docker ps -q | wc -l)
+export HOST_CONTAINERS_RUNNING
+
+LABELS=${LABELS:-v1}
+# Dev run (labels v1 by default), then the throughput sweep (dev subset only).
+gpu_stage "results/decider/dev_${LABELS}_bs1.parquet" decider_run --split dev --labels "$LABELS" \
+  --batch-size 1 --measure-energy --run-id "dev_${LABELS}_bs1"
+gpu_stage results/decider_best_bs.json decider_sweep --labels "$LABELS"
+
+# Test split: only when the owner exports ALLOW_TEST=1 (labels frozen, never set by scripts).
+if [ "${ALLOW_TEST:-}" = "1" ]; then
+  gpu_stage "results/decider/test_${LABELS}_bs1.parquet" decider_run --split test \
+    --labels "$LABELS" --batch-size 1 --measure-energy --run-id "test_${LABELS}_bs1"
+  BEST=$(python3 -c "import json; print(json.load(open('results/decider_best_bs.json'))['best_batch_size'])")
+  if [ "$BEST" != "1" ]; then
+    gpu_stage "results/decider/test_${LABELS}_bs${BEST}.parquet" decider_run --split test \
+      --labels "$LABELS" --batch-size "$BEST" --measure-energy --run-id "test_${LABELS}_bs${BEST}"
+  fi
+else
+  echo "skip test-split Decider runs (ALLOW_TEST=1 not set)"
+fi

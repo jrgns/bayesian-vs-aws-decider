@@ -1,0 +1,129 @@
+{
+  "run_id": "dev_v1_bs1_pass2",
+  "summary": {
+    "run_id": "dev_v1_bs1_pass2",
+    "split": "dev",
+    "labels_version": "v1",
+    "batch_size": 1,
+    "limit": null,
+    "n": 2002,
+    "accuracy": 0.6643356643356644,
+    "accuracy_ci_lo": 0.6433566433566433,
+    "accuracy_ci_hi": 0.6848151848151848,
+    "macro_f1": 0.6667466362890944,
+    "macro_f1_ci_lo": 0.6454188250469923,
+    "macro_f1_ci_hi": 0.6868318620062915,
+    "brier": 0.49321327119008856,
+    "ece": 0.14857974352238776,
+    "wall_s": 150.70936812390573,
+    "items_per_s": 13.28384575505655,
+    "batch_p50_ms": 72.12958950549364,
+    "batch_p95_ms": 90.67594453226774,
+    "item_p50_ms": 72.12958950549364,
+    "item_p95_ms": 90.67594453226774,
+    "gpu_J": null,
+    "gpu_J_per_item": null,
+    "cpu_pkg_J": null,
+    "cpu_pkg_J_per_item": null,
+    "gpu_marginal_J": null,
+    "gpu_marginal_J_per_item": null,
+    "cpu_pkg_marginal_J": null,
+    "cpu_pkg_marginal_J_per_item": null,
+    "energy_ids": ""
+  },
+  "confusion_matrix": [
+    [
+      222,
+      11,
+      0,
+      18,
+      4,
+      24,
+      7
+    ],
+    [
+      32,
+      191,
+      1,
+      37,
+      11,
+      7,
+      7
+    ],
+    [
+      15,
+      1,
+      180,
+      8,
+      5,
+      67,
+      10
+    ],
+    [
+      18,
+      43,
+      0,
+      185,
+      16,
+      13,
+      11
+    ],
+    [
+      34,
+      20,
+      1,
+      56,
+      155,
+      7,
+      13
+    ],
+    [
+      1,
+      0,
+      30,
+      1,
+      1,
+      231,
+      22
+    ],
+    [
+      0,
+      0,
+      0,
+      2,
+      0,
+      118,
+      166
+    ]
+  ],
+  "per_class_recall": [
+    0.7762237762237763,
+    0.6678321678321678,
+    0.6293706293706294,
+    0.6468531468531469,
+    0.541958041958042,
+    0.8076923076923077,
+    0.5804195804195804
+  ],
+  "class_names": [
+    "Computer Science",
+    "Electrical Engineering",
+    "Psychology",
+    "Mechanical Engineering",
+    "Civil Engineering",
+    "Medical Science",
+    "Biochemistry"
+  ],
+  "slicing_check": {
+    "n": 32,
+    "batch_size": 1,
+    "bitwise_identical": true,
+    "max_abs_logit_diff": 0.0
+  },
+  "model": {
+    "id": "StrandsAgents/strands-decider-2B-hobson-v21",
+    "revision": "2b52a6235c1b8306bbfa30b00b9d4b74b63a39f5"
+  },
+  "load_s": null,
+  "energy": {}
+}
