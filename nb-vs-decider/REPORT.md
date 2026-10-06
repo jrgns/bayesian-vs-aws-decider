@@ -12,6 +12,9 @@ Every number below comes from a file in `results/` (named under each table). Not
    NB uses 1.47 mWh gross (0.75 mWh marginal) on the CPU package alone, about 5,600× (gross) to 9,200× (marginal) less.
    Training NB at 100 per class, including hyperparameter tuning, costs 85.9 mWh gross. That is about the energy of
    **10 Decider predictions**, so the training cost is paid back after about 10 predictions. Human labelling effort is not counted.
+3. **Stability.** NB never flips. Decider is bit-for-bit repeatable as long as its batch setup and option order stay fixed.
+   Changing the batch size or the batch neighbours flips about 0.3% of predictions (all near-ties). Shuffling the option order
+   flips 16.7% (reweighted estimate for the full test set; section 6).
 
 ## 2. Dataset decision and contamination check
 
@@ -59,7 +62,7 @@ and 35 Hugging Face corpora rebuilt via `load_dataset` (`results/contamination.c
   (`results/dataset_summary.json`; `contamination_hits.csv` lists every hit).
 
 **Residual limitation.** The pre-training corpus of the base model, Qwen3.5-2B-Base, is not published and cannot be checked.
-WOS abstracts may have been in it, which would favour Decider (section 6).
+WOS abstracts may have been in it, which would favour Decider (section 7).
 
 ## 3. Setup
 
@@ -342,7 +345,31 @@ NB's single-item latency was measured on orion (`scripts/nb_latency.py`, `result
 
 Sources: `decider_runs.csv`, `nb_runs.csv`, `energy_summary.csv` (table `timing`).
 
-## 6. Threats to validity
+## 6. Stability (flip rate)
+
+Are the predictions repeatable? 1,000 test items were re-run 5–10 times under each condition, every run in a separate
+process. Half the items are near Decider's decision boundary; the reweighted figure (10% near-boundary, 90% rest) estimates
+the flip rate on the full test set. Details: [`stability/STABILITY.md`](stability/STABILITY.md).
+
+| Method / setup | Test accuracy | kWh per 1,000 predictions (gross) | Flip rate, reweighted | Bit-for-bit repeatable |
+| --- | --- | --- | --- | --- |
+| NB, 100/class (crossover config) | 0.7476 | 1.47e-6 | **0%** | yes (10 runs in one process, plus 10 separate retrains) |
+| Decider bs=1, fixed setup | 0.7207 | 8.22e-3 | **0%** | yes (10 processes, default PyTorch) |
+| Decider bs=2, fixed setup | 0.7197 | 7.55e-3 | **0%** | yes (10 processes, default PyTorch; also with deterministic mode) |
+| Decider, bs=1 vs bs=2 | | | 0.30% | no |
+| Decider, different batch neighbours (bs=2) | | | 0.24% | no |
+| Decider, option order shuffled | | | 16.7% | no |
+
+- **NB never flips.** Its outputs are byte-identical across processes.
+- **Decider is bit-for-bit repeatable when the setup is fixed:** the same batch size, batch composition and option order.
+  PyTorch deterministic mode adds nothing on this stack and costs about 7% throughput.
+- **Changing the batch size or the batch neighbours flips about 1 prediction in 300.** All of these are near-ties, so the
+  effect is float rounding.
+- **Shuffling the option order flips about 1 prediction in 6.** That is a genuine prompt-order effect: the model favours
+  Medical Science when it is listed first.
+- **In production, keep the batch setup fixed and never reorder the options.**
+
+## 7. Threats to validity
 
 - **Unknown base-model pre-training data.** Qwen3.5-2B-Base's pre-training corpus is not published. WOS abstracts could be in it,
   which would inflate Decider's accuracy. Overlap with Decider's fine-tuning data was checked (section 2), and the overlapping items
@@ -384,11 +411,11 @@ Sources: `decider_runs.csv`, `nb_runs.csv`, `energy_summary.csv` (table `timing`
 - **The cost of human labelling is not counted.** NB at the crossover needs 700 labelled abstracts; Decider needs none, only the
   label wording.
 - **Batch size changes outputs.** bs=1 and bs=2 differ on 31 predictions, and logits are not bitwise identical across batch sizes
-  (bf16 padding). This is why the headline uses bs=1. The follow-up stability test (`docs/PLAN_STABILITY.md`) measures it fully.
+  (bf16 padding). This is why the headline uses bs=1. Section 6 measures it fully.
 - **Some energy was measured while 22 containers were running.** That covers `dev_v1_bs1` and the meter sanity run, and neither is
   used in the headline. The test runs, the v3 sweep and the NB measurements ran with 4 containers.
 
-## 7. Reproduce
+## 8. Reproduce
 
 **Prerequisites:**
 - a Linux host with Docker (compose v2);
@@ -413,7 +440,7 @@ with the selected wording, test runs at bs=1 and at the best batch size, NB curv
 - Lint and tests: `docker compose run --rm dev`.
 - The analysis stages (`crossover`, `energy_summary`, `plots`) are CPU only and need nothing but `results/`.
 
-## 8. Versions
+## 9. Versions
 
 From `results/versions.json` unless noted.
 

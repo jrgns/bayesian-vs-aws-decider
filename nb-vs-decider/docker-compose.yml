@@ -27,6 +27,7 @@ services:
       - ./data:/app/data:ro
       - ./results:/app/results
       - ./plots:/app/plots
+      - ./stability:/app/stability
       - hf-cache:/cache/hf
 
   # CPU-only stages (dataset, contamination): the pipeline runtime image without the GPU.
@@ -43,6 +44,7 @@ services:
       - ./results:/app/results
       - ./plots:/app/plots
       - ./data:/app/data
+      - ./stability:/app/stability
       - hf-cache:/cache/hf
 
   dev:

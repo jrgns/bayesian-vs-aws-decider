@@ -1,0 +1,107 @@
+{
+  "token_length": {
+    "p50": 256.0,
+    "max": 991
+  },
+  "D1_vs_D2": {
+    "all": {
+      "n": 1000,
+      "byte_identical": 0.0
+    },
+    "longer_in_pair_unpadded": {
+      "n": 498,
+      "byte_identical": 0.0
+    },
+    "shorter_in_pair_padded": {
+      "n": 498,
+      "byte_identical": 0.0
+    },
+    "equal_length": {
+      "n": 4,
+      "byte_identical": 0.0
+    }
+  },
+  "D6b_vs_D2": {
+    "same_padded_length": {
+      "n_item_runs": 1685,
+      "byte_identical": 0.9899109792284867
+    },
+    "different_padded_length": {
+      "n_item_runs": 3315,
+      "byte_identical": 0.15444947209653093
+    }
+  },
+  "D6a_vs_D2": {
+    "byte_identical_all_runs": 1.0,
+    "flips": 0
+  },
+  "D3_vs_D2": {
+    "byte_identical_all_runs": 1.0,
+    "flips": 0
+  },
+  "D5": {
+    "accuracy_per_run": [
+      0.596,
+      0.565,
+      0.525,
+      0.583,
+      0.6
+    ],
+    "pred_label_share_per_run": [
+      [
+        0.148,
+        0.078,
+        0.104,
+        0.137,
+        0.182,
+        0.135,
+        0.216
+      ],
+      [
+        0.12,
+        0.112,
+        0.056,
+        0.111,
+        0.196,
+        0.283,
+        0.122
+      ],
+      [
+        0.142,
+        0.078,
+        0.056,
+        0.224,
+        0.096,
+        0.31,
+        0.094
+      ],
+      [
+        0.13,
+        0.139,
+        0.052,
+        0.096,
+        0.173,
+        0.316,
+        0.094
+      ],
+      [
+        0.123,
+        0.108,
+        0.08,
+        0.119,
+        0.185,
+        0.259,
+        0.126
+      ]
+    ],
+    "true_label_share": [
+      0.111,
+      0.143,
+      0.127,
+      0.138,
+      0.174,
+      0.142,
+      0.165
+    ]
+  }
+}

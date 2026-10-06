@@ -1,0 +1,535 @@
+ Image nb-vs-decider:dev Building 
+ Image nb-vs-decider:dev Built 
+ Container nb-vs-decider-cpu-run-c62988e9c81e Creating 
+ Container nb-vs-decider-cpu-run-c62988e9c81e Created 
+2026-10-06 11:29:44,168 INFO __main__: wrote /app/stability/subset_ids.csv: 1000 items from test_v3_bs1
+2026-10-06 11:29:44,168 INFO __main__: strata {'near_boundary': 500, 'rest': 500}
+2026-10-06 11:29:44,178 INFO __main__: labels by stratum:
+label           0   1   2   3    4   5   6
+stratum                                   
+near_boundary  39  71  55  67  103  71  94
+rest           72  72  72  71   71  71  71
+ Container nb-vs-decider-pipeline-run-67f4d9171063 Creating 
+ Container nb-vs-decider-pipeline-run-67f4d9171063 Created 
+2026-10-06 11:29:48,767 INFO __main__: wrote /app/stability/runs/N1/run_0.parquet: acc 0.6800
+2026-10-06 11:29:49,054 INFO __main__: wrote /app/stability/runs/N1/run_1.parquet: acc 0.6800
+2026-10-06 11:29:49,342 INFO __main__: wrote /app/stability/runs/N1/run_2.parquet: acc 0.6800
+2026-10-06 11:29:49,633 INFO __main__: wrote /app/stability/runs/N1/run_3.parquet: acc 0.6800
+2026-10-06 11:29:49,920 INFO __main__: wrote /app/stability/runs/N1/run_4.parquet: acc 0.6800
+2026-10-06 11:29:50,207 INFO __main__: wrote /app/stability/runs/N1/run_5.parquet: acc 0.6800
+2026-10-06 11:29:50,494 INFO __main__: wrote /app/stability/runs/N1/run_6.parquet: acc 0.6800
+2026-10-06 11:29:50,782 INFO __main__: wrote /app/stability/runs/N1/run_7.parquet: acc 0.6800
+2026-10-06 11:29:51,070 INFO __main__: wrote /app/stability/runs/N1/run_8.parquet: acc 0.6800
+2026-10-06 11:29:51,339 INFO __main__: wrote /app/stability/runs/N1/run_9.parquet: acc 0.6800
+ Container nb-vs-decider-pipeline-run-71d30b26e3b6 Creating 
+ Container nb-vs-decider-pipeline-run-71d30b26e3b6 Created 
+2026-10-06 11:29:55,824 INFO __main__: wrote /app/stability/runs/N2/run_0.parquet: acc 0.6800
+ Container nb-vs-decider-pipeline-run-0e8e36937703 Creating 
+ Container nb-vs-decider-pipeline-run-0e8e36937703 Created 
+2026-10-06 11:30:00,388 INFO __main__: wrote /app/stability/runs/N2/run_1.parquet: acc 0.6800
+ Container nb-vs-decider-pipeline-run-045538f81558 Creating 
+ Container nb-vs-decider-pipeline-run-045538f81558 Created 
+2026-10-06 11:30:04,852 INFO __main__: wrote /app/stability/runs/N2/run_2.parquet: acc 0.6800
+ Container nb-vs-decider-pipeline-run-329713668c31 Creating 
+ Container nb-vs-decider-pipeline-run-329713668c31 Created 
+2026-10-06 11:30:09,667 INFO __main__: wrote /app/stability/runs/N2/run_3.parquet: acc 0.6800
+ Container nb-vs-decider-pipeline-run-5ef0ba14563b Creating 
+ Container nb-vs-decider-pipeline-run-5ef0ba14563b Created 
+2026-10-06 11:30:14,407 INFO __main__: wrote /app/stability/runs/N2/run_4.parquet: acc 0.6800
+ Container nb-vs-decider-pipeline-run-1d464bdb3024 Creating 
+ Container nb-vs-decider-pipeline-run-1d464bdb3024 Created 
+2026-10-06 11:30:19,063 INFO __main__: wrote /app/stability/runs/N2/run_5.parquet: acc 0.6800
+ Container nb-vs-decider-pipeline-run-9e182d9f9e23 Creating 
+ Container nb-vs-decider-pipeline-run-9e182d9f9e23 Created 
+2026-10-06 11:30:23,762 INFO __main__: wrote /app/stability/runs/N2/run_6.parquet: acc 0.6800
+ Container nb-vs-decider-pipeline-run-c662ff8eb92b Creating 
+ Container nb-vs-decider-pipeline-run-c662ff8eb92b Created 
+2026-10-06 11:30:28,451 INFO __main__: wrote /app/stability/runs/N2/run_7.parquet: acc 0.6800
+ Container nb-vs-decider-pipeline-run-83f641ff6d71 Creating 
+ Container nb-vs-decider-pipeline-run-83f641ff6d71 Created 
+2026-10-06 11:30:33,207 INFO __main__: wrote /app/stability/runs/N2/run_8.parquet: acc 0.6800
+ Container nb-vs-decider-pipeline-run-8bc2491114fc Creating 
+ Container nb-vs-decider-pipeline-run-8bc2491114fc Created 
+2026-10-06 11:30:37,921 INFO __main__: wrote /app/stability/runs/N2/run_9.parquet: acc 0.6800
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D2 run 0
+ Container nb-vs-decider-pipeline-run-35a7354b4143 Creating 
+ Container nb-vs-decider-pipeline-run-35a7354b4143 Created 
+2026-10-06 11:30:42,137 INFO __main__: run D2/0: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 3013.47it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3457.56it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9320.55it/s]
+2026-10-06 11:33:00,589 INFO __main__: wrote /app/stability/runs/D2/run_0.parquet: acc 0.5870, 91.5s, 10.92 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D2 run 1
+ Container nb-vs-decider-pipeline-run-18762c28e970 Creating 
+ Container nb-vs-decider-pipeline-run-18762c28e970 Created 
+2026-10-06 11:33:06,104 INFO __main__: run D2/1: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2877.04it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3853.29it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9989.04it/s]
+2026-10-06 11:35:24,686 INFO __main__: wrote /app/stability/runs/D2/run_1.parquet: acc 0.5870, 91.9s, 10.88 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D2 run 2
+ Container nb-vs-decider-pipeline-run-ac6f9ba68e6d Creating 
+ Container nb-vs-decider-pipeline-run-ac6f9ba68e6d Created 
+2026-10-06 11:35:30,200 INFO __main__: run D2/2: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2714.50it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3528.83it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 8416.43it/s]
+2026-10-06 11:37:50,178 INFO __main__: wrote /app/stability/runs/D2/run_2.parquet: acc 0.5870, 93.1s, 10.74 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D2 run 3
+ Container nb-vs-decider-pipeline-run-e5b465e6edba Creating 
+ Container nb-vs-decider-pipeline-run-e5b465e6edba Created 
+2026-10-06 11:37:55,653 INFO __main__: run D2/3: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2622.11it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3404.70it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 8729.10it/s]
+2026-10-06 11:40:15,564 INFO __main__: wrote /app/stability/runs/D2/run_3.parquet: acc 0.5870, 93.5s, 10.69 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D2 run 4
+ Container nb-vs-decider-pipeline-run-49f432ae0b37 Creating 
+ Container nb-vs-decider-pipeline-run-49f432ae0b37 Created 
+2026-10-06 11:40:20,929 INFO __main__: run D2/4: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2797.10it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3623.85it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9684.80it/s]
+2026-10-06 11:42:41,286 INFO __main__: wrote /app/stability/runs/D2/run_4.parquet: acc 0.5870, 93.7s, 10.67 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D2 run 5
+ Container nb-vs-decider-pipeline-run-930d14bf3483 Creating 
+ Container nb-vs-decider-pipeline-run-930d14bf3483 Created 
+2026-10-06 11:42:46,784 INFO __main__: run D2/5: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 3110.05it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3468.52it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 10095.89it/s]
+2026-10-06 11:45:07,324 INFO __main__: wrote /app/stability/runs/D2/run_5.parquet: acc 0.5870, 94.0s, 10.63 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D2 run 6
+ Container nb-vs-decider-pipeline-run-fd0add47107f Creating 
+ Container nb-vs-decider-pipeline-run-fd0add47107f Created 
+2026-10-06 11:45:12,978 INFO __main__: run D2/6: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2709.43it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3406.31it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9767.68it/s]
+2026-10-06 11:47:34,499 INFO __main__: wrote /app/stability/runs/D2/run_6.parquet: acc 0.5870, 94.2s, 10.61 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D2 run 7
+ Container nb-vs-decider-pipeline-run-834b70a7396d Creating 
+ Container nb-vs-decider-pipeline-run-834b70a7396d Created 
+2026-10-06 11:47:39,998 INFO __main__: run D2/7: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2815.25it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3440.07it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 10212.96it/s]
+2026-10-06 11:50:01,345 INFO __main__: wrote /app/stability/runs/D2/run_7.parquet: acc 0.5870, 94.6s, 10.57 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D2 run 8
+ Container nb-vs-decider-pipeline-run-04305ea322db Creating 
+ Container nb-vs-decider-pipeline-run-04305ea322db Created 
+2026-10-06 11:50:06,742 INFO __main__: run D2/8: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2943.45it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3901.98it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 10082.69it/s]
+2026-10-06 11:52:28,051 INFO __main__: wrote /app/stability/runs/D2/run_8.parquet: acc 0.5870, 94.3s, 10.60 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D2 run 9
+ Container nb-vs-decider-pipeline-run-66d0db8ab708 Creating 
+ Container nb-vs-decider-pipeline-run-66d0db8ab708 Created 
+2026-10-06 11:52:33,424 INFO __main__: run D2/9: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2783.21it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3271.90it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9698.16it/s]
+2026-10-06 11:54:54,455 INFO __main__: wrote /app/stability/runs/D2/run_9.parquet: acc 0.5870, 94.2s, 10.61 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D1 run 0
+ Container nb-vs-decider-pipeline-run-36816ed8e7e0 Creating 
+ Container nb-vs-decider-pipeline-run-36816ed8e7e0 Created 
+2026-10-06 11:54:59,941 INFO __main__: run D1/0: Cond(batch_size=1, deterministic=False, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2804.17it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3580.79it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9608.88it/s]
+2026-10-06 11:57:27,941 INFO __main__: wrote /app/stability/runs/D1/run_0.parquet: acc 0.5880, 101.5s, 9.85 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D1 run 1
+ Container nb-vs-decider-pipeline-run-dd27e7d19843 Creating 
+ Container nb-vs-decider-pipeline-run-dd27e7d19843 Created 
+2026-10-06 11:57:33,406 INFO __main__: run D1/1: Cond(batch_size=1, deterministic=False, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2695.63it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3439.60it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9358.37it/s]
+2026-10-06 12:00:01,545 INFO __main__: wrote /app/stability/runs/D1/run_1.parquet: acc 0.5880, 101.7s, 9.84 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D1 run 2
+ Container nb-vs-decider-pipeline-run-75ec58277617 Creating 
+ Container nb-vs-decider-pipeline-run-75ec58277617 Created 
+2026-10-06 12:00:07,012 INFO __main__: run D1/2: Cond(batch_size=1, deterministic=False, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2819.24it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3591.53it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9632.46it/s]
+2026-10-06 12:02:34,525 INFO __main__: wrote /app/stability/runs/D1/run_2.parquet: acc 0.5880, 101.3s, 9.87 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D1 run 3
+ Container nb-vs-decider-pipeline-run-8e447917c125 Creating 
+ Container nb-vs-decider-pipeline-run-8e447917c125 Created 
+2026-10-06 12:02:39,994 INFO __main__: run D1/3: Cond(batch_size=1, deterministic=False, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2744.96it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3458.98it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9444.04it/s]
+2026-10-06 12:05:07,671 INFO __main__: wrote /app/stability/runs/D1/run_3.parquet: acc 0.5880, 101.0s, 9.90 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D1 run 4
+ Container nb-vs-decider-pipeline-run-a66d5fccd0e1 Creating 
+ Container nb-vs-decider-pipeline-run-a66d5fccd0e1 Created 
+2026-10-06 12:05:13,101 INFO __main__: run D1/4: Cond(batch_size=1, deterministic=False, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2806.18it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3460.41it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9153.81it/s]
+2026-10-06 12:07:40,820 INFO __main__: wrote /app/stability/runs/D1/run_4.parquet: acc 0.5880, 101.2s, 9.88 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D1 run 5
+ Container nb-vs-decider-pipeline-run-04aa02b4581a Creating 
+ Container nb-vs-decider-pipeline-run-04aa02b4581a Created 
+2026-10-06 12:07:46,329 INFO __main__: run D1/5: Cond(batch_size=1, deterministic=False, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2637.50it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3725.79it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9168.63it/s]
+2026-10-06 12:10:13,568 INFO __main__: wrote /app/stability/runs/D1/run_5.parquet: acc 0.5880, 101.0s, 9.90 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D1 run 6
+ Container nb-vs-decider-pipeline-run-4dd73659be6a Creating 
+ Container nb-vs-decider-pipeline-run-4dd73659be6a Created 
+2026-10-06 12:10:18,949 INFO __main__: run D1/6: Cond(batch_size=1, deterministic=False, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2692.94it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3549.23it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9776.79it/s]
+2026-10-06 12:12:47,081 INFO __main__: wrote /app/stability/runs/D1/run_6.parquet: acc 0.5880, 101.3s, 9.87 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D1 run 7
+ Container nb-vs-decider-pipeline-run-0abcb19a05af Creating 
+ Container nb-vs-decider-pipeline-run-0abcb19a05af Created 
+2026-10-06 12:12:52,529 INFO __main__: run D1/7: Cond(batch_size=1, deterministic=False, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2681.40it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3742.41it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9992.46it/s]
+2026-10-06 12:15:20,627 INFO __main__: wrote /app/stability/runs/D1/run_7.parquet: acc 0.5880, 101.5s, 9.85 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D1 run 8
+ Container nb-vs-decider-pipeline-run-383ac17f7b48 Creating 
+ Container nb-vs-decider-pipeline-run-383ac17f7b48 Created 
+2026-10-06 12:15:26,191 INFO __main__: run D1/8: Cond(batch_size=1, deterministic=False, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2835.48it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3390.02it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 10056.62it/s]
+2026-10-06 12:17:54,261 INFO __main__: wrote /app/stability/runs/D1/run_8.parquet: acc 0.5880, 101.4s, 9.86 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D1 run 9
+ Container nb-vs-decider-pipeline-run-40d15c93cc18 Creating 
+ Container nb-vs-decider-pipeline-run-40d15c93cc18 Created 
+2026-10-06 12:17:59,772 INFO __main__: run D1/9: Cond(batch_size=1, deterministic=False, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2686.36it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3671.97it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9128.10it/s]
+2026-10-06 12:20:27,985 INFO __main__: wrote /app/stability/runs/D1/run_9.parquet: acc 0.5880, 101.7s, 9.84 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D3 run 0
+ Container nb-vs-decider-pipeline-run-4e6032b60e9f Creating 
+ Container nb-vs-decider-pipeline-run-4e6032b60e9f Created 
+2026-10-06 12:20:33,494 INFO __main__: run D3/0: Cond(batch_size=2, deterministic=True, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2881.66it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3603.10it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9231.25it/s]
+2026-10-06 12:23:02,048 INFO __main__: wrote /app/stability/runs/D3/run_0.parquet: acc 0.5870, 101.1s, 9.89 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D3 run 1
+ Container nb-vs-decider-pipeline-run-c20b6317a34e Creating 
+ Container nb-vs-decider-pipeline-run-c20b6317a34e Created 
+2026-10-06 12:23:07,412 INFO __main__: run D3/1: Cond(batch_size=2, deterministic=True, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2816.65it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3606.71it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9628.31it/s]
+2026-10-06 12:25:35,221 INFO __main__: wrote /app/stability/runs/D3/run_1.parquet: acc 0.5870, 100.5s, 9.95 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D3 run 2
+ Container nb-vs-decider-pipeline-run-6b01a5c5ec88 Creating 
+ Container nb-vs-decider-pipeline-run-6b01a5c5ec88 Created 
+2026-10-06 12:25:40,763 INFO __main__: run D3/2: Cond(batch_size=2, deterministic=True, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2858.81it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3667.95it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9612.52it/s]
+2026-10-06 12:28:09,225 INFO __main__: wrote /app/stability/runs/D3/run_2.parquet: acc 0.5870, 101.0s, 9.90 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D3 run 3
+ Container nb-vs-decider-pipeline-run-12f1856452cd Creating 
+ Container nb-vs-decider-pipeline-run-12f1856452cd Created 
+2026-10-06 12:28:14,600 INFO __main__: run D3/3: Cond(batch_size=2, deterministic=True, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2800.84it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3560.03it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9133.69it/s]
+2026-10-06 12:30:42,645 INFO __main__: wrote /app/stability/runs/D3/run_3.parquet: acc 0.5870, 101.0s, 9.90 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D3 run 4
+ Container nb-vs-decider-pipeline-run-db68bd1a7b3a Creating 
+ Container nb-vs-decider-pipeline-run-db68bd1a7b3a Created 
+2026-10-06 12:30:48,126 INFO __main__: run D3/4: Cond(batch_size=2, deterministic=True, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2802.29it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3193.23it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 8749.41it/s]
+2026-10-06 12:33:16,178 INFO __main__: wrote /app/stability/runs/D3/run_4.parquet: acc 0.5870, 100.7s, 9.93 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D3 run 5
+ Container nb-vs-decider-pipeline-run-837b4245688e Creating 
+ Container nb-vs-decider-pipeline-run-837b4245688e Created 
+2026-10-06 12:33:21,673 INFO __main__: run D3/5: Cond(batch_size=2, deterministic=True, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 3014.59it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3647.22it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9324.56it/s]
+2026-10-06 12:35:49,717 INFO __main__: wrote /app/stability/runs/D3/run_5.parquet: acc 0.5870, 100.7s, 9.93 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D3 run 6
+ Container nb-vs-decider-pipeline-run-fdad1b64104f Creating 
+ Container nb-vs-decider-pipeline-run-fdad1b64104f Created 
+2026-10-06 12:35:55,242 INFO __main__: run D3/6: Cond(batch_size=2, deterministic=True, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2697.11it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3814.74it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9363.27it/s]
+2026-10-06 12:38:23,889 INFO __main__: wrote /app/stability/runs/D3/run_6.parquet: acc 0.5870, 101.2s, 9.88 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D3 run 7
+ Container nb-vs-decider-pipeline-run-07f722444119 Creating 
+ Container nb-vs-decider-pipeline-run-07f722444119 Created 
+2026-10-06 12:38:29,324 INFO __main__: run D3/7: Cond(batch_size=2, deterministic=True, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2805.69it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3572.66it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9790.55it/s]
+2026-10-06 12:40:57,502 INFO __main__: wrote /app/stability/runs/D3/run_7.parquet: acc 0.5870, 100.8s, 9.93 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D3 run 8
+ Container nb-vs-decider-pipeline-run-de76ff7d24d2 Creating 
+ Container nb-vs-decider-pipeline-run-de76ff7d24d2 Created 
+2026-10-06 12:41:03,017 INFO __main__: run D3/8: Cond(batch_size=2, deterministic=True, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 3014.43it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3305.42it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9165.87it/s]
+2026-10-06 12:43:31,654 INFO __main__: wrote /app/stability/runs/D3/run_8.parquet: acc 0.5870, 101.2s, 9.88 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D3 run 9
+ Container nb-vs-decider-pipeline-run-5b3de2c1d10e Creating 
+ Container nb-vs-decider-pipeline-run-5b3de2c1d10e Created 
+2026-10-06 12:43:37,104 INFO __main__: run D3/9: Cond(batch_size=2, deterministic=True, warn_only=False, option_shuffle=False, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2765.95it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3323.54it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9740.25it/s]
+2026-10-06 12:46:04,602 INFO __main__: wrote /app/stability/runs/D3/run_9.parquet: acc 0.5870, 100.8s, 9.92 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D5 run 0
+ Container nb-vs-decider-pipeline-run-6cf3bf6df50a Creating 
+ Container nb-vs-decider-pipeline-run-6cf3bf6df50a Created 
+2026-10-06 12:46:10,082 INFO __main__: run D5/0: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=True, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2719.32it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3805.22it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 10140.58it/s]
+2026-10-06 12:48:31,705 INFO __main__: wrote /app/stability/runs/D5/run_0.parquet: acc 0.5960, 94.7s, 10.56 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D5 run 1
+ Container nb-vs-decider-pipeline-run-b08a5ce4f78a Creating 
+ Container nb-vs-decider-pipeline-run-b08a5ce4f78a Created 
+2026-10-06 12:48:37,087 INFO __main__: run D5/1: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=True, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2858.96it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3358.35it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 10154.78it/s]
+2026-10-06 12:50:58,459 INFO __main__: wrote /app/stability/runs/D5/run_1.parquet: acc 0.5650, 94.6s, 10.57 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D5 run 2
+ Container nb-vs-decider-pipeline-run-32a315d9c611 Creating 
+ Container nb-vs-decider-pipeline-run-32a315d9c611 Created 
+2026-10-06 12:51:03,958 INFO __main__: run D5/2: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=True, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 3023.12it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3342.30it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9898.06it/s]
+2026-10-06 12:53:25,937 INFO __main__: wrote /app/stability/runs/D5/run_2.parquet: acc 0.5250, 95.0s, 10.52 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D5 run 3
+ Container nb-vs-decider-pipeline-run-5c0f4ca27584 Creating 
+ Container nb-vs-decider-pipeline-run-5c0f4ca27584 Created 
+2026-10-06 12:53:31,476 INFO __main__: run D5/3: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=True, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2802.50it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3386.83it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9541.18it/s]
+2026-10-06 12:55:53,746 INFO __main__: wrote /app/stability/runs/D5/run_3.parquet: acc 0.5830, 95.3s, 10.50 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D5 run 4
+ Container nb-vs-decider-pipeline-run-c0b5e2c44857 Creating 
+ Container nb-vs-decider-pipeline-run-c0b5e2c44857 Created 
+2026-10-06 12:55:59,144 INFO __main__: run D5/4: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=True, item_order='canonical'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2814.97it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3844.16it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9915.54it/s]
+2026-10-06 12:58:20,721 INFO __main__: wrote /app/stability/runs/D5/run_4.parquet: acc 0.6000, 94.7s, 10.56 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D6a run 0
+ Container nb-vs-decider-pipeline-run-e6c8dc47010a Creating 
+ Container nb-vs-decider-pipeline-run-e6c8dc47010a Created 
+2026-10-06 12:58:26,098 INFO __main__: run D6a/0: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=False, item_order='swap_within_batch'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2893.36it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3555.25it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9343.97it/s]
+2026-10-06 13:00:47,484 INFO __main__: wrote /app/stability/runs/D6a/run_0.parquet: acc 0.5870, 94.4s, 10.59 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D6a run 1
+ Container nb-vs-decider-pipeline-run-b0fc325cdb4f Creating 
+ Container nb-vs-decider-pipeline-run-b0fc325cdb4f Created 
+2026-10-06 13:00:52,922 INFO __main__: run D6a/1: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=False, item_order='swap_within_batch'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2924.07it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3055.96it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9602.83it/s]
+2026-10-06 13:03:14,796 INFO __main__: wrote /app/stability/runs/D6a/run_1.parquet: acc 0.5870, 94.7s, 10.56 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D6a run 2
+ Container nb-vs-decider-pipeline-run-a9a58e1f8657 Creating 
+ Container nb-vs-decider-pipeline-run-a9a58e1f8657 Created 
+2026-10-06 13:03:20,239 INFO __main__: run D6a/2: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=False, item_order='swap_within_batch'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2580.87it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3291.59it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9477.31it/s]
+2026-10-06 13:05:41,799 INFO __main__: wrote /app/stability/runs/D6a/run_2.parquet: acc 0.5870, 94.8s, 10.54 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D6a run 3
+ Container nb-vs-decider-pipeline-run-b63a787bbda2 Creating 
+ Container nb-vs-decider-pipeline-run-b63a787bbda2 Created 
+2026-10-06 13:05:47,290 INFO __main__: run D6a/3: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=False, item_order='swap_within_batch'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2842.45it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3404.93it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9994.39it/s]
+2026-10-06 13:08:08,872 INFO __main__: wrote /app/stability/runs/D6a/run_3.parquet: acc 0.5870, 94.6s, 10.57 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D6a run 4
+ Container nb-vs-decider-pipeline-run-ae2168d60c13 Creating 
+ Container nb-vs-decider-pipeline-run-ae2168d60c13 Created 
+2026-10-06 13:08:14,305 INFO __main__: run D6a/4: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=False, item_order='swap_within_batch'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2965.34it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3307.38it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9955.33it/s]
+2026-10-06 13:10:35,891 INFO __main__: wrote /app/stability/runs/D6a/run_4.parquet: acc 0.5870, 94.7s, 10.56 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D6b run 0
+ Container nb-vs-decider-pipeline-run-3396bf9e76d3 Creating 
+ Container nb-vs-decider-pipeline-run-3396bf9e76d3 Created 
+2026-10-06 13:10:41,412 INFO __main__: run D6b/0: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=False, item_order='shuffle_all'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2761.70it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3714.24it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9840.59it/s]
+2026-10-06 13:13:03,154 INFO __main__: wrote /app/stability/runs/D6b/run_0.parquet: acc 0.5890, 94.7s, 10.56 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D6b run 1
+ Container nb-vs-decider-pipeline-run-308d0e05fdd8 Creating 
+ Container nb-vs-decider-pipeline-run-308d0e05fdd8 Created 
+2026-10-06 13:13:08,607 INFO __main__: run D6b/1: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=False, item_order='shuffle_all'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 3027.65it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3664.21it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9944.04it/s]
+2026-10-06 13:15:29,659 INFO __main__: wrote /app/stability/runs/D6b/run_1.parquet: acc 0.5830, 94.5s, 10.58 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D6b run 2
+ Container nb-vs-decider-pipeline-run-f2a84f4c7274 Creating 
+ Container nb-vs-decider-pipeline-run-f2a84f4c7274 Created 
+2026-10-06 13:15:35,023 INFO __main__: run D6b/2: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=False, item_order='shuffle_all'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2767.71it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3677.87it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9876.43it/s]
+2026-10-06 13:17:55,851 INFO __main__: wrote /app/stability/runs/D6b/run_2.parquet: acc 0.5850, 94.1s, 10.62 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D6b run 3
+ Container nb-vs-decider-pipeline-run-75444f88f2d7 Creating 
+ Container nb-vs-decider-pipeline-run-75444f88f2d7 Created 
+2026-10-06 13:18:01,335 INFO __main__: run D6b/3: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=False, item_order='shuffle_all'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2864.24it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3454.23it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9608.26it/s]
+2026-10-06 13:20:22,912 INFO __main__: wrote /app/stability/runs/D6b/run_3.parquet: acc 0.5820, 94.5s, 10.58 items/s
+2143 /usr/bin/python3 /opt/llama-swap-sd/llama_swap_sd.py
+preflight OK: all GPUs idle
+run   D6b run 4
+ Container nb-vs-decider-pipeline-run-4cafb3ad71c7 Creating 
+ Container nb-vs-decider-pipeline-run-4cafb3ad71c7 Created 
+2026-10-06 13:20:28,381 INFO __main__: run D6b/4: Cond(batch_size=2, deterministic=False, warn_only=False, option_shuffle=False, item_order='shuffle_all'), 1000 items, labels v3
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 2643.84it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3323.32it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 9177.28it/s]
+2026-10-06 13:22:49,176 INFO __main__: wrote /app/stability/runs/D6b/run_4.parquet: acc 0.5860, 94.3s, 10.60 items/s
+ Container nb-vs-decider-cpu-run-7ced05e0d143 Creating 
+ Container nb-vs-decider-cpu-run-7ced05e0d143 Created 
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 3641, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 168, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 197, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7668, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7676, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'batch_p50_ms'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/app/scripts/stability_metrics.py", line 274, in <module>
+    main()
+  File "/app/scripts/stability_metrics.py", line 227, in main
+    runs = {c: r for c in CONDITIONS if (r := load_condition(c, ids)) is not None}
+                                              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/scripts/stability_metrics.py", line 191, in load_condition
+    speed.append({c: df[c].iloc[0] for c in SPEED_COLS})
+                     ~~^^^
+  File "/opt/venv/lib/python3.12/site-packages/pandas/core/frame.py", line 4378, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 3648, in get_loc
+    raise KeyError(key) from err
+KeyError: 'batch_p50_ms'
+
