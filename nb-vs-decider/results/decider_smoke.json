@@ -1,61 +1,84 @@
 {
   "all_pass": true,
+  "ask_latency": {
+    "calls": 50,
+    "median_ms": 113.95679105771706,
+    "min_ms": 108.03511505946517,
+    "p95_ms": 118.66424791514874
+  },
   "base": {
     "id": "Qwen/Qwen3.5-2B-Base",
     "revision": "b1485b2fa6dfa1287294f269f5fb618e03d52d7c"
   },
+  "batched_path": {
+    "argmax_agree_ask_vs_bs1": true,
+    "argmax_agree_ask_vs_bs8": true,
+    "argmax_agree_bs1_vs_bs8": true,
+    "how_to_use_collect_logits": "from strands_decider.data.format import Example; from strands_decider.evaluate import collect_logits, predictions_from_logits. Build Example(kind='choice', state=<text>, instructions=<question>, options=[[name, description], ...], label=<int index into options>); description may be ''. Prompt text is rendered by the package itself (Example.to_question -> prompting.render_state/render_question), so no manual formatting. Call collect_logits(model, examples, device='cuda', batch_size=N, max_length=model.config.max_length): the default max_length=3072 is NOT the model's 4096 window, so always pass it. It returns raw untempered logits (columns past each row's option count hold -1e4), labels, n_slots, examples; options are never shuffled in eval. Apply temperature with predictions_from_logits(logits, labels, n_slots, examples, temperature=model.config.temperature_by_kind): divides logits by the per-kind temperature (choice=0.8177 for v21) then masked softmax. predictions_from_logits returns Prediction objects with .probs, .pred. collect_logits uses the model on its current device but does not use the engine's prefix cache or fp32 handling (cuda keeps bf16 torso, fp32 head).",
+    "logits_bitwise_identical_bs1_vs_bs8": false,
+    "max_abs_logit_diff_bs1_vs_bs8": 0.03395485877990723,
+    "max_abs_prob_diff_ask_vs_bs1": 4.98851776122855e-05,
+    "max_abs_prob_diff_ask_vs_bs8": 0.011356832313537568,
+    "max_abs_prob_diff_bs1_vs_bs8": 0.011354267597198486,
+    "n_states": 8,
+    "temperature_applied": {
+      "choice": 0.8177019773481682,
+      "noul": 0.8177019773481682,
+      "score": 1.192199469079091
+    }
+  },
   "checks": {
     "choice.billing": {
-      "abs_diff": 0.0007000000000000339,
-      "actual": 0.8903,
+      "abs_diff": 0.0020000000000000018,
+      "actual": 0.889,
       "expected": 0.891,
       "pass": true
     },
     "choice.confidence": {
-      "abs_diff": 0.0014999999999999458,
-      "actual": 0.8355,
+      "abs_diff": 0.0033999999999999586,
+      "actual": 0.8336,
       "expected": 0.837,
       "pass": true
     },
     "choice.retail": {
-      "abs_diff": 0.0005000000000000004,
-      "actual": 0.0535,
+      "abs_diff": 0.0006000000000000033,
+      "actual": 0.0546,
       "expected": 0.054,
       "pass": true
     },
     "choice.sales": {
-      "abs_diff": 0.0011999999999999997,
-      "actual": 0.0562,
+      "abs_diff": 0.0013999999999999985,
+      "actual": 0.0564,
       "expected": 0.055,
       "pass": true
     },
     "noul": {
-      "abs_diff": 0.0010999999999999899,
-      "actual": 0.8761,
+      "abs_diff": 0.00039999999999995595,
+      "actual": 0.8746,
       "expected": 0.875,
       "pass": true
     },
     "score": {
-      "abs_diff": 0.0008999999999999009,
-      "actual": 1.0709,
+      "abs_diff": 0.0013999999999998458,
+      "actual": 1.0714,
       "expected": 1.07,
       "pass": true
     },
     "score.calm": {
-      "abs_diff": 0.0010999999999999899,
-      "actual": 0.1411,
+      "abs_diff": 0.0002999999999999947,
+      "actual": 0.1403,
       "expected": 0.14,
       "pass": true
     },
     "score.depressed": {
-      "abs_diff": 0.0011000000000000176,
-      "actual": 0.2121,
+      "abs_diff": 0.0007000000000000062,
+      "actual": 0.2117,
       "expected": 0.211,
       "pass": true
     },
     "score.frustrated": {
-      "abs_diff": 0.0021999999999999797,
-      "actual": 0.6468,
+      "abs_diff": 0.0010000000000000009,
+      "actual": 0.648,
       "expected": 0.649,
       "pass": true
     }
@@ -74,7 +97,7 @@
       10
     ]
   },
-  "load_seconds": 7.690738804056309,
+  "load_seconds": 13.798787110019475,
   "model": {
     "id": "StrandsAgents/strands-decider-2B-hobson-v21",
     "revision": "2b52a6235c1b8306bbfa30b00b9d4b74b63a39f5"

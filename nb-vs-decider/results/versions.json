@@ -1,6 +1,10 @@
 {
   "base_model_id": "Qwen/Qwen3.5-2B-Base",
   "base_model_revision": "b1485b2fa6dfa1287294f269f5fb618e03d52d7c",
+  "causal_conv1d": {
+    "transformers_sees_it": true,
+    "version": "1.7.0"
+  },
   "cpu_model": "AMD Ryzen 9 3900 12-Core Processor",
   "cudnn": 92400,
   "decider_install_source": {
@@ -16,7 +20,7 @@
     "uuid": "GPU-1e7c68c6-0837-0871-bcdd-7e41798fc63b",
     "visible_gpu_count": 1
   },
-  "image": "sha256:745f0a39896fd4c33f158044a18902ffcb5c4f084ae2a1fca988a01668452a5e",
+  "image": "sha256:b783694e1ecc954c607dd7d8c9c90850fc870a37bf5e739ea665a855c3b2eab4",
   "kernel": "7.0.0-34-generic",
   "machine": "x86_64",
   "packages": {
@@ -32,6 +36,7 @@
     "annotated-types": "0.8.0",
     "anyio": "4.15.1",
     "attrs": "26.1.0",
+    "causal_conv1d": "1.7.0",
     "certifi": "2026.7.22",
     "click": "8.5.0",
     "cloudpickle": "3.1.2",

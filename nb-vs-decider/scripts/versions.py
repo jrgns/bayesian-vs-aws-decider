@@ -29,6 +29,16 @@ def decider_install_source() -> dict:
     return {"url": info.get("url"), "git_commit": vcs.get("commit_id")}
 
 
+def causal_conv1d_info() -> dict:
+    from transformers.utils.import_utils import is_causal_conv1d_available
+
+    try:
+        version = metadata.version("causal-conv1d")
+    except metadata.PackageNotFoundError:
+        version = None
+    return {"version": version, "transformers_sees_it": is_causal_conv1d_available()}
+
+
 def gpu_info() -> dict:
     import pynvml
 
@@ -61,6 +71,7 @@ def main() -> None:
         "torch_cuda": torch.version.cuda,
         "cudnn": torch.backends.cudnn.version(),
         "gpu": gpu_info(),
+        "causal_conv1d": causal_conv1d_info(),
         "decider_package_version": metadata.version("strands-decider"),
         "decider_install_source": decider_install_source(),
         "decider_model_id": ckpt.model_id,
