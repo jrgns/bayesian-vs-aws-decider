@@ -1,0 +1,27 @@
+# Decider label wording, version 2: taxonomy-informed rewording (approved 2026-10-06).
+# Scope is taken from the WOS-46985 category documentation (Data.xlsx Domain -> area names), written as
+# plain prose. Contains no example items and no text from any abstract. Selection rule: see LOG.md.
+version: 2
+instructions: "Which field of science or engineering is this research abstract from?"
+labels:
+  0:
+    name: Computer Science
+    description: "Computer science research: algorithms and data structures, programming and software engineering, databases and storage, operating systems, parallel and distributed computing, network security and cryptography, computer vision, image processing and graphics, machine learning, symbolic computation and bioinformatics."
+  1:
+    name: Electrical Engineering
+    description: "Electrical and electronic engineering research: electricity and electrical circuits and networks, electric motors and generators, single-phase power, operational amplifiers, microcontrollers, analog signal processing, control engineering such as PID and digital control, system identification and state-space models, and satellite radio."
+  2:
+    name: Psychology
+    description: "Psychology research on how people think, feel and behave: attention, problem-solving and false memories, social cognition and person perception, nonverbal communication, prejudice, gender roles, prosocial behaviour, leadership, media violence, child abuse and prenatal development, and psychological disorders such as depression, eating disorders, personality disorders and schizophrenia."
+  3:
+    name: Mechanical Engineering
+    description: "Mechanical engineering research: machine design and computer-aided design, internal combustion engines, fluid mechanics and hydraulics, thermodynamics, strength of materials, materials engineering and manufacturing engineering."
+  4:
+    name: Civil Engineering
+    description: "Civil and environmental engineering research: buildings and green building, bridges, concrete and novel building materials, geotextiles, smart materials, construction management, highway networks, water pollution and rainwater harvesting, solar and wind energy, remote sensing, ambient intelligence and stealth technology."
+  5:
+    name: Medical Science
+    description: "Medical and health research on diseases, patients and care: clinical studies of conditions such as cancer, diabetes, heart disease, arthritis, asthma, skin, digestive and kidney conditions, infections, HIV, dementia and Parkinson's disease, mental health conditions, addiction and smoking cessation, women's, children's and senior health, sleep, injuries, and health care services."
+  6:
+    name: Biochemistry
+    description: "Biochemistry and molecular biology research: genetics, DNA and RNA, proteins and enzymes (enzymology), human metabolism, immunology, cell biology, and laboratory methods such as the polymerase chain reaction, Southern and Northern blotting, and DNA/RNA sequencing."
